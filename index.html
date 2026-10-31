@@ -1394,7 +1394,7 @@ button.wps{cursor:pointer}
         <p class="wllead">Íslenskt lestrarapp fyrir krakka 7–10 ára. Barnið les, velur hvernig sagan fer og safnar stjörnum.</p>
         <ul class="wlft"><li><i style="background:#0A60D6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C6.5 4 9.5 4 12 6c2.5-2 5.5-2 8-.5V19c-2.5-1.5-5.5-1.5-8 .5-2.5-2-5.5-2-8-.5z M12 6v13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></i><div><b>Sögur þar sem barnið velur leiðina</b><span>Yfir 50 sögur á tveimur þyngdarstigum</span></div></li><li><i style="background:#AF52DE"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.6 10.8c.6.5 1 1.2 1.1 2V16h5v-.2c.1-.8.5-1.5 1.1-2A6 6 0 0012 3z"/></svg></i><div><b>Byggir upp lesskilning</b><span>Spurningar í lok hverrar sögu dýpka skilning á textanum</span></div></li><li><i style="background:#1E8E3E"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><div><b>Yfirlit fyrir foreldra</b><span>Lestrardagar, mínútur og leshraði</span></div></li><li><i style="background:#C25E00"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19.5" r="1"/></svg></i><div><b>Virkar líka án nets</b><span>Í spjaldtölvu og síma</span></div></li></ul>
         <div class="wlacts"><button class="obbtn primary" id="wlNew" type="button">Stofna aðgang</button><button class="obbtn soft" id="wlLogin" type="button">Ég er með aðgang: skrá inn</button><button class="obbtn plain" id="wlLocal" type="button">Prófa fyrst án aðgangs</button><button class="obbtn plain wlguide" id="wlGuide" type="button">Hvernig virkar appið?</button></div>
-        <p class="wlfoot"><button type="button" class="oblink" data-legal="privacy">Persónuvernd</button> · <button type="button" class="oblink" data-legal="terms">Skilmálar</button><span class="wlver">Útgáfa 41</span></p>
+        <p class="wlfoot"><button type="button" class="oblink" data-legal="privacy">Persónuvernd</button> · <button type="button" class="oblink" data-legal="terms">Skilmálar</button><span class="wlver">Útgáfa 42</span></p>
       </div>
     </div>
   </section>
@@ -1698,7 +1698,7 @@ button.wps{cursor:pointer}
         <div class="ngh">Sameiginlegt</div><div class="ngrp" id="pNavShared"></div>
         <div class="ngh">Gögn</div><div class="ngrp" id="pNavData"></div>
         <div class="ngh">Hjálp</div><div class="ngrp" id="pNavHelp"></div>
-        <p class="pver">Lestrarstund · útgáfa 41</p>
+        <p class="pver">Lestrarstund · útgáfa 42</p>
       </nav>
       <div class="pmain">
         <button class="pback pback2" id="pBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Stillingar</button>
@@ -1801,7 +1801,7 @@ button.wps{cursor:pointer}
           <div class="rsec" data-rs="upptokur">
         <div class="pcard">
           <h3>Upptökur af upplestri</h3>
-          <p class="pmuted">Hlustaðu á upptökur frá ólíkum tímum til að heyra framfarirnar. Síðustu 40 upptökur hvers lesanda eru geymdar á þessu tæki.</p>
+          <p class="pmuted">Hlustaðu á upptökur frá ólíkum tímum til að heyra framfarirnar. Upptakan heldur áfram þegar barnið flettir og hver síða vistast sem sér upptaka. Síðustu 150 upptökur hvers lesanda eru geymdar á þessu tæki.</p>
           <div class="reclist" id="recList"></div>
         </div>
           </div>
@@ -6281,7 +6281,7 @@ function markRead(){if(pg&&pg.end==null)pg.end=R.ms}
 function renderPage(){
   const st=STORIES[run.story],id=run.path[run.path.length-1],p=st.pages[id];
   $('rStory').textContent=st.title;$('rPage').textContent=st.book?`Kafli ${p.ch} af ${st.len}`:`Síða ${run.path.length} af ${st.len}`;
-  if(REC.mr){$('recFeed').textContent='';recStop()}else $('recFeed').textContent='';
+  if(REC.mr)recRoll();else $('recFeed').textContent='';
   fig.innerHTML=svgWrap(drawScene(p.scene,run.story),p.task?'':'Mynd úr sögunni');
   {const sylOn=PR.age===7&&PR.settings.syl!==false&&!run.buddy,ht=richText(pers(p.text));$('storyText').innerHTML=sylOn?sylWrap(ht):ht}recUI();setupWrite(p);rulerLine=0;applyTextPrefs();setupListen(st,id);
   $('buddyNote').hidden=!run.buddy;if(run.buddy)$('buddyNote').textContent='Þú ert að lesa upphátt fyrir litla bróður þinn. Lestu skýrt og rólega og taktu upp lesturinn.';
@@ -6642,39 +6642,48 @@ function idb(){if(!window.indexedDB)return Promise.reject(new Error('no idb'));r
 async function recAll(pid){const db=await idb();return new Promise((res,rej)=>{const st=db.transaction('rec').objectStore('rec');const q=pid?st.index('pid').getAll(pid):st.getAll();q.onsuccess=()=>res((q.result||[]).sort((a,b)=>a.t-b.t));q.onerror=()=>rej(q.error)})}
 async function recOp(fn){const db=await idb();return new Promise((res,rej)=>{const tx=db.transaction('rec','readwrite');fn(tx.objectStore('rec'));tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
 const recPut=o=>recOp(s=>s.put(o)),recDel=id=>recOp(s=>s.delete(id));
-async function recTrim(pid,max=40){const all=await recAll(pid);for(const r of all.slice(0,Math.max(0,all.length-max)))await recDel(r.id)}
+async function recTrim(pid,max=150){const all=await recAll(pid);for(const r of all.slice(0,Math.max(0,all.length-max)))await recDel(r.id)}
 const MICIC=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
 const STOPIC=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="3" fill="currentColor"/></svg>`;
 function recUI(){const b=$('recBtn');if(!b)return;const on=!!REC.mr;
   $('recRow').hidden=!REC.ok||REC.denied||PR.settings.rec===false;
   b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));
-  b.innerHTML=on?`${STOPIC}<span>Stoppa upptöku</span><b id="recClock">${fmt(Date.now()-REC.t0).replace(/^0/,'')}</b>`:`${MICIC}<span>Lesa upphátt og taka upp</span>`}
+  b.innerHTML=on?`${STOPIC}<span>Stoppa upptöku</span><b id="recClock">${fmt(Date.now()-(REC.s0||REC.t0)).replace(/^0/,'')}</b>`:`${MICIC}<span>Lesa upphátt og taka upp</span>`}
+function recMeta(){const id=run.path[run.path.length-1],st=STORIES[run.story];
+  return {pid:pidOf(PR),buddy:!!run.buddy,s:run.story,p:id,page:run.path.length,title:st.title,w:st.book?0:wc(pers(st.pages[id].text)),text:st.book?`Upplestur úr bókinni, kafli ${st.pages[id].ch}`:plain(pers(st.pages[id].text)).slice(0,160)}}
+/* ein upptaka á hverja síðu, en hljóðneminn er opinn allan tímann: þegar flett er vistast síðan og ný upptaka hefst sjálfkrafa */
+function recBegin(){const mt=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}});
+  let mr;try{mr=new MediaRecorder(REC.stream,mt?{mimeType:mt,audioBitsPerSecond:32000}:undefined)}catch(e){mr=new MediaRecorder(REC.stream)}
+  const chunks=[];mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+  REC.mr=mr;REC.chunks=chunks;REC.meta=recMeta();REC.t0=Date.now();mr.start(1000)}
 async function recStart(){
   if(REC.mr)return;$('recFeed').textContent='';
   try{REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}
   catch(e){REC.denied=true;recUI();$('recRow').hidden=false;$('recBtn').hidden=true;$('recFeed').textContent='Ekki tókst að opna hljóðnemann. Mamma eða pabbi geta leyft hann í stillingum spjaldtölvunnar.';return}
-  const id=run.path[run.path.length-1],st=STORIES[run.story];
-  REC.meta={pid:pidOf(PR),buddy:!!run.buddy,s:run.story,p:id,page:run.path.length,title:st.title,w:st.book?0:wc(pers(st.pages[id].text)),text:st.book?`Upplestur úr bókinni, kafli ${st.pages[id].ch}`:plain(pers(st.pages[id].text)).slice(0,160)};
-  REC.chunks=[];const mt=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}});
-  try{REC.mr=new MediaRecorder(REC.stream,mt?{mimeType:mt,audioBitsPerSecond:32000}:undefined)}catch(e){REC.mr=new MediaRecorder(REC.stream)}
-  REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data)};
-  REC.mr.start(1000);REC.t0=Date.now();
-  REC.iv=setInterval(()=>{const c=$('recClock');if(c)c.textContent=fmt(Date.now()-REC.t0).replace(/^0/,'');if(Date.now()-REC.t0>180000)recStop()},500);
+  recBegin();REC.s0=Date.now();REC.n=0;
+  clearInterval(REC.iv);REC.iv=setInterval(()=>{const c=$('recClock');if(c)c.textContent=fmt(Date.now()-REC.s0).replace(/^0/,'');if(REC.mr&&Date.now()-REC.t0>180000)recRoll(true)},500);
   recUI();
 }
+function recSave(mr,chunks,meta,t0,quiet){
+  return new Promise(res=>{mr.onstop=async()=>{
+    const dur=Date.now()-t0,blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});
+    if(dur<1500||!blob.size){if(!quiet)$('recFeed').textContent='Upptakan var of stutt. Reyndu aftur.';return res(false)}
+    try{await recPut({id:String(Date.now())+Math.random().toString(36).slice(2,6),t:Date.now(),dur,mime:blob.type,blob,...meta});await recTrim(meta.pid);REC.n=(REC.n||0)+1;res(true)}
+    catch(e){if(!quiet)$('recFeed').textContent='Ekki tókst að vista upptökuna.';res(false)}};
+    try{mr.stop()}catch(e){res(false)}})}
+/* flett á nýja síðu: vista síðuna sem var lesin og halda áfram að taka upp */
+function recRoll(cap){if(!REC.mr||!REC.stream)return;const m=recMeta();
+  if(!cap&&REC.meta&&REC.meta.s===m.s&&REC.meta.p===m.p&&REC.meta.page===m.page)return;
+  const mr=REC.mr,ch=REC.chunks,meta=REC.meta,t0=REC.t0;
+  if(cap){REC.mr=null;clearInterval(REC.iv);recSave(mr,ch,meta,t0,true).then(()=>{recRelease();$('recFeed').textContent='Upptakan stoppaði eftir þrjár mínútur á sömu síðu og er vistuð.';recUI()});return}
+  recBegin();recSave(mr,ch,meta,t0,true);$('recFeed').textContent='Upptakan heldur áfram á nýju síðunni.';recUI()}
+function recRelease(){try{REC.stream&&REC.stream.getTracks().forEach(t=>t.stop())}catch(e){}REC.stream=null}
 function recStop(quiet){
   if(!REC.mr)return Promise.resolve();
-  const mr=REC.mr,meta=REC.meta,t0=REC.t0;REC.mr=null;clearInterval(REC.iv);
-  return new Promise(res=>{mr.onstop=async()=>{
-    try{REC.stream&&REC.stream.getTracks().forEach(t=>t.stop())}catch(e){}REC.stream=null;
-    const dur=Date.now()-t0,blob=new Blob(REC.chunks,{type:mr.mimeType||'audio/webm'});REC.chunks=[];
-    if(dur<1500||!blob.size){if(!quiet)$('recFeed').textContent='Upptakan var of stutt. Reyndu aftur.';recUI();return res()}
-    try{await recPut({id:String(Date.now()),t:Date.now(),dur,mime:blob.type,blob,...meta});await recTrim(meta.pid);
-      if(!quiet)$('recFeed').textContent='Upptakan er vistuð. Mamma eða pabbi geta hlustað á hana.'}
-    catch(e){if(!quiet)$('recFeed').textContent='Ekki tókst að vista upptökuna.'}
-    recUI();res()};
-    try{mr.stop()}catch(e){res()}
-  })}
+  const mr=REC.mr,meta=REC.meta,t0=REC.t0,ch=REC.chunks;REC.mr=null;clearInterval(REC.iv);
+  return recSave(mr,ch,meta,t0,quiet).then(ok=>{recRelease();const n=REC.n||0;
+    if(!quiet&&n)$('recFeed').textContent=n>1?`Upptakan er vistuð (${n} síður). Mamma eða pabbi geta hlustað á hana.`:'Upptakan er vistuð. Mamma eða pabbi geta hlustað á hana.';
+    REC.n=0;recUI()})}
 let recURLs=[];
 async function renderRecs(){
   const box=$('recList');recURLs.forEach(u=>URL.revokeObjectURL(u));recURLs=[];
@@ -7602,6 +7611,7 @@ const FAQ=[
  ['Hvernig breyti ég útliti bókasafnsins?','Veldu barnið í stillingunum, opnaðu flipann Stillingar og veldu undir Útlit bókasafnsins: Kápur og flipar, Opin bók, Hringekja eða Bókaskápurinn. Hægt er að hafa ólíkt útlit fyrir hvert barn.'],
  ['Barnið gleymdi að skrá heimalestur. Hvað geri ég?','Undir Ég las bók heima er hægt að velja í dag, í gær eða í fyrradag. Lengra aftur í tímann skráir þú lesturinn á mælaborðinu undir Skrá heimalestur.'],
  ['Virkar appið án nettengingar?','Já. Þegar appið hefur verið opnað einu sinni virkar það líka án nets og samstillist þegar tenging kemst aftur á.'],
+ ['Þarf að ýta á upptöku á hverri síðu?','Nei. Þegar barnið ýtir á „Lesa upphátt og taka upp“ heldur upptakan áfram á meðan það flettir, þangað til það ýtir á „Stoppa upptöku“ eða sagan klárast. Hver síða vistast sem sér upptaka svo auðvelt er að hlusta á einstakar síður.'],
  ['Hvert fara upptökurnar af lestrinum?','Þær eru eingöngu geymdar á tækinu og fara aldrei í skýið. Ef þú vilt geyma þær er best að vista afrit.'],
  ['Barnið sér ekki nýjustu útgáfuna af appinu.','Lokaðu appinu alveg og opnaðu það aftur. Ef það dugar ekki skaltu endurhlaða síðuna einu sinni.'],
 ];
