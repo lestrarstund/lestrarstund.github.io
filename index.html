@@ -7567,8 +7567,42 @@ $('certList').addEventListener('click',e=>{const b=e.target.closest('[data-cert]
    (aðeins ef þeir standa einir milli sérhljóða; sérhljóðinn á undan er þá langur: ó·trú·le·ga, á·kve·ður). Önnur samhljóð + j fara saman (rey·kja·vík) nema á eftir r, l, n, ð,
    tvöföldum samhljóða eða ng (byr·ja·ði, mill·jón, bekk·ju·num, ha·ming·ju); rlj helst saman á eftir r (nor·ður·ljós).
    SYLB: samsett orð. | merkir orðamörk sem skiptingin verður að virða. Bætið nýjum samsettum orðum hér við þegar sögur bætast við.
-   SYLF: orð með fastri skiptingu (aðallega erlend nöfn). */
+   SYLF: orð með fastri skiptingu (aðallega erlend nöfn).
+   SYLD: stofnar og samsett orð með fastri skiptingu (lengsta forskeyti ræður). Síðasta atkvæði stofnsins rennur saman
+   við beygingarendinguna og reglurnar skipta því (rauð·hett + u → rauð·het·tu, pi·par·kö·ku·hús + ið → …·hú·sið).
+   Tengi-s fylgir fyrri liðnum (ko·nungs·höll, na·fars·bor). */
 const VOW='aáeéiíoóuúyýæö';
+const SYLD=(s=>Object.fromEntries(s.trim().split(/\s+/).map(v=>[v.replace(/·/g,''),v])))(`
+rauð·hett mjall·hvít bú·koll í·ben·holt ha·fra·hlíð gull·brá ö·sku·busk stekk·jar·staur gil·ja·gaur þvö·ru·sleik pot·ta·ske·fil pot·ta·skefl
+aska·sleik hur·ða·skell skyr·gám bjúg·na·kræk glug·ga·gæg gát·ta·þef ket·krók ker·ta·sník lep·pa·lúð jó·la·kött jó·la·katt jó·la·kett
+þing·vell þing·vall þing·völl al·man·na·gjá su·ður·skaut nor·ður·pól su·ður·pól
+kið·ling tröll·skess skes·su·karl fjalls·hlíð grjót·brú stein·brú tré·brú hó·fa·skell jarð·skjálft dal·verp un·dir·fót un·dir·fæt
+mor·gun·mat há·de·gis·mat kvöld·mat gras·bal blóm·skrúð het·tu·úlp flau·els·hett skó·gar·stíg skó·gar·blóm skó·gar·höggs·mað
+skó·gar·höggs·mann skó·gar·högg skó·gar·vörð skó·gar·verð fa·ta·skáp nátt·slopp nátt·húf klin·ku·lás blóm·vönd blóm·vend rúm·stokk
+aug·na·blik sól·skins·blett hálm·hús spý·tu·hús múr·steins·hús múr·stein hjól·bör múr·skeið skor·stein eld·stæð sú·pu·pott
+græn·me·tis·súp úl·fa·ban glug·ga·kist þak·skegg ko·nungs·höll ko·nungs·hall ko·nungs·son ko·nungs·syn tö·fra·spe·gil tö·fra·spegl
+stjúp·móð hé·gó·ma·gjörn ö·fund·sjúk vei·ði·mað vei·ði·mann gim·stein sil·fur·hníf bóm·ull stein·ull fa·rand·sö·lu·kon gler·kist
+trjá·rót e·pla·bit hrein·ger·ning in·ni·skó brauð·skorp brauð·mol va·sa·hníf tungl·skin kí·sil·stein pi·par·kö·ku·hús pi·par·kök
+pi·par·kak pön·nu·kök pön·nu·kak brjóst·syk rjó·ma·ís járn·grind kjúk·lin·ga·bein ba·ka·ra·ofn dýr·grip per·lu·fest karls·son
+ne·stis·skjatt ne·stis·skjött klet·ta·belt tö·fra·hár eld·bál elds·log na·fars·bor kón·ga·bæ mjól·kur·kýr
+vatns·drop vatns·guf vatns·æð hring·rás út·haf út·höf regn·ský snjó·kri·stal snjó·korn kra·na·vatn bló·ma·saf frjó·korn
+bý·flug·na·bú bý·flug hun·angs·kök hun·angs·kak sex·hyr·ning vax·hólf far·fugl heim·skau·ta·krí hnatt·ferð mið·næ·tur·sól sand·síl
+blað·græn kol·tví·sý·ring ljós·til·lí·fun súr·efn ár·hring trjá·bol lauf·blað lauf·blöð jarð·hi·ta·vatn jarð·hit jarð·skorp
+hve·ra·svæð gos·hver hi·ta·veit djúp·sjá·var·fisk djúp·sjá·var rann·sók·nar·drón kaf·bát só·lar·ljós líf·ljó·mun kyn·fisk ljós·agn
+ef·na·hvarf ef·na·hvörf kol·krabb upp·skrif·tar·bók erf·ða·efn fru·mu·kjarn upp·vö·sku·nar·lög upp·þvot·ta·lög jar·ðar·ber
+til·rau·na·glas kjar·na·sam·run vet·nis·a·tóm he·lí·um se·gul·svið se·gul·skjöld sól·vind nor·ður·ljós svep·pa·net svep·pa·þráð
+svep·pa·þræð ró·tar·kerf ne·ðan·jar·ðar mó·ður·tré við·vö·ru·nar·boð jarð·flek fle·ka·mót nor·ður·a·me·rí·ku·flek ev·ra·sí·u·flek
+glið·nun sig·dal þjóð·garðs·vörð
+jó·la·da·ga·tal jó·la·ljós jó·la·kert jó·la·bók jó·la·bæ jó·la·sið jó·la·tré jó·la·svein ko·par·pe·ning ko·par·ly·kil ko·par·lykl
+sil·fur·bjöll sil·fur·bjall að·ven·tu·krans gre·ni·grein skamm·deg ís·skáp lau·fa·brauð flór·syk kö·ku·box bó·ka·mer·ki
+jó·la·bó·ka·flóð ul·lar·sokk vett·ling snjó·karl korn·band smá·fugl snjó·titt·ling skau·ta·svell verk·fæ·ra·kass hen·gi·lás
+tö·fra·orð sauð·fé mjól·kur·froð pön·nu·skóf eld·hús·skáp eld·hús·skúff tré·skeið grjó·na·graut her·ber·gis·hurð dy·ra·karm
+hur·ðar·karm skyr·tunn skyr·dós han·gi·kjöt þor·láks·mess að·fan·ga·dag að·fan·ga·de·gi ve·trar·sól·stöð kirk·ju·klukk stjör·nu·bjart
+a·ðal·stíg berg·kri·stals·gler ber·ja·saft·flösk brauð·sneið ei·kar·skóg e·ðal·stein e·plis·bit fjal·la·gra·sa·seyð gei·ta·bræð
+góð·hjart heil·brigð hrí·fu·skaft hús·rá·ðend hús·vegg lang·stærst mið·bróð mið·lungs·stór múr·stei·na·stromp nátt·skikkj
+næ·tur·skúf ofn·op sam·stund stein·efn svefn·eit tin·nu·stein trjá·grein tö·fra·svefn ul·lar·á·breið upp·ur ör·skots·stund
+þak·skíf þrek·vax spjóts·odd
+`);
 const SYLB=['|ljós','at|vinn','af|greiðsl','aska|sleik','beina|grind','bíla|stæð','bý|flug','eld|jötn','fimleika|stjarn','fjólu|blá','fjöl|skyld','fótbolta|skól',
  'fót|spor','fugla|skít','gang|stétt','geim|skip','geim|stöð','gjósku|strók','gler|aug','gull|skegg','göngu|skíð','hafra|graut','heið|skír','horn|strönd',
  'hurða|skell','ís|skáp','í|þrótt','kerta|sník','liðs|treyj','land|spend','lang|af','lang|amm','laufa|brauð','ljós|blá','lof|orð','marka|skor','manns|treyj',
@@ -7593,7 +7627,9 @@ function sylRule(L){const nuc=[];
   return {n:nuc.length,cuts}}
 function sylSplit(w){const L=w.toLowerCase();
   for(const k in SYLF)if(L.startsWith(k)){const p=SYLF[k].split('·');let s=0;const out=p.map(x=>{const r=w.slice(s,s+x.length);s+=x.length;return r});out[out.length-1]+=w.slice(s);return out.length>1?out:null}
-  const bnd=new Set();for(const pt of SYLB){const plain=pt.replace(/\|/g,''),i=L.indexOf(plain);if(i<0)continue;let o=i;pt.split('|').slice(0,-1).forEach(seg=>{o+=seg.length;bnd.add(o)})}
+  const bnd=new Set();{let best='';for(const k in SYLD)if(k.length>best.length&&L.startsWith(k))best=k;
+    if(best){let o=0;SYLD[best].split('·').slice(0,-1).forEach(seg=>{o+=seg.length;bnd.add(o)})}}
+  for(const pt of SYLB){const plain=pt.replace(/\|/g,''),i=L.indexOf(plain);if(i<0)continue;let o=i;pt.split('|').slice(0,-1).forEach(seg=>{o+=seg.length;bnd.add(o)})}
   const chunks=[];let s=0;[...bnd].sort((a,b)=>a-b).forEach(c=>{chunks.push([s,c]);s=c});chunks.push([s,L.length]);
   const cuts=[];let n=0;
   chunks.forEach(([a,b],i)=>{const r=sylRule(L.slice(a,b));if(!r.n)return;if(i&&n)cuts.push(a);n+=r.n;r.cuts.forEach(c=>cuts.push(a+c))});
