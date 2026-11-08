@@ -43,7 +43,11 @@ Foreldri getur valið mynd úr myndasafni tækisins sem prófílmynd fyrir barn,
 
 **Nafnlaus talning á notkun sagna**
 
-Til að sjá hvaða sögur börnum líkar best teljum við hve oft hver saga er byrjuð og kláruð, hvaða endir er valinn og á hvaða síðu lestri sögu er hætt, ásamt aldurshópi (7–8 eða 9–11 ára). Talningin er nafnlaus. Engin nöfn, auðkenni, aðgangur eða upplýsingar um tæki eru vistuð með tölunum, aðeins samanlagðir teljarar fyrir hverja sögu. Sögur sem börnin búa sjálf til í Sögusmiðjunni eru ekki taldar.
+Til að sjá hvaða sögur börnum líkar best teljum við hve oft hver saga er byrjuð og kláruð, hvaða endir er valinn og á hvaða síðu lestri sögu er hætt, ásamt aldurshópi (5–6, 7–8 eða 9–11 ára). Talningin er nafnlaus. Engin nöfn, auðkenni, aðgangur eða upplýsingar um tæki eru vistuð með tölunum, aðeins samanlagðir teljarar fyrir hverja sögu. Sögur sem börnin búa sjálf til í Sögusmiðjunni eru ekki taldar.
+
+**Nafnlausar villutilkynningar**
+
+Ef villa kemur upp í appinu er send stutt tilkynning svo hægt sé að laga hana: villuboðin, í hvaða hluta appsins villan varð, útgáfa appsins, tegund vafra (til dæmis Safari eða Chrome), gerð tækis (sími, spjaldtölva eða tölva) og dagsetning. Engin nöfn, auðkenni, aðgangur, texti sem barnið skrifar eða önnur gögn um notandann fylgja. Tilkynningunum er eytt þegar villan hefur verið skoðuð.
 
 ### 4. Tilgangur og heimild
 
@@ -53,6 +57,7 @@ Til að sjá hvaða sögur börnum líkar best teljum við hve oft hver saga er 
 | Halda utan um lestur barna og samstilla á milli tækja | Upplýsingar um börn og lestrarsaga | Samþykki foreldris (a-liður 1. mgr. 6. gr. GDPR) |
 | Öryggi, varnir gegn misnotkun og bilanaleit | Tæknilegar upplýsingar | Lögmætir hagsmunir (f-liður 1. mgr. 6. gr. GDPR) |
 | Bæta efni appsins og velja nýjar sögur | Nafnlausir teljarar fyrir hverja sögu | Lögmætir hagsmunir (f-liður 1. mgr. 6. gr. GDPR) |
+| Finna og laga villur í appinu | Nafnlausar villutilkynningar | Lögmætir hagsmunir (f-liður 1. mgr. 6. gr. GDPR) |
 | Svara fyrirspurnum og senda nauðsynlegar tilkynningar um aðganginn | Netfang | Samningur við foreldri |
 
 Við notum upplýsingarnar ekki í markaðsskyni, til persónusniðinna auglýsinga eða til að byggja upp persónusnið af börnum. Leshraði og stjörnur eru aðeins sýnd foreldrinu og barninu sjálfu.
@@ -68,7 +73,7 @@ Við notum eftirfarandi þjónustuaðila sem vinna upplýsingar fyrir okkar hön
 | Vinnsluaðili | Hlutverk | Staðsetning gagna |
 | --- | --- | --- |
 | Google (Firebase Authentication) | Innskráning foreldra | Bandaríkin |
-| Google (Cloud Firestore) | Geymsla lestrargagna, stillinga og nafnlausra teljara | [GAGNASVÆÐI, t.d. europe-west1 í Belgíu] |
+| Google (Cloud Firestore) | Geymsla lestrargagna, stillinga, nafnlausra teljara og villutilkynninga | [GAGNASVÆÐI, t.d. europe-west1 í Belgíu] |
 | Netlify | Hýsing á sjálfu appinu (forritsskrár) | Dreift net netþjóna, þar á meðal í Bandaríkjunum |
 
 ### 7. Flutningur út fyrir EES
