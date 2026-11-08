@@ -540,6 +540,16 @@ h1{font-weight:800;letter-spacing:-.03em;font-size:clamp(2.2rem,1.5rem + 2.6vw,2
 .stepbtn{width:48px;height:48px;background:var(--sky-soft);color:var(--accent);box-shadow:none;font-weight:600;font-size:1.7rem}
 .stepbtn:active{transform:scale(.94);box-shadow:none}
 .stepval{font-size:1.45rem;font-weight:700}
+/* Klukkuhringur: lestrartíminn fyllir hringinn (60 mín = fullur hringur) */
+.clockstep{background:none;border:0;box-shadow:none;padding:0;gap:18px}
+.clockstep .stepbtn{width:52px;height:52px;background:var(--surface);box-shadow:var(--shadow)}
+.clockring{position:relative;width:132px;height:132px;display:grid;place-items:center;flex:none}
+.clockring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.clockring circle{fill:none;stroke-width:12}
+.clockring .crt{stroke:var(--sky-soft);stroke:color-mix(in srgb,var(--accent) 20%,transparent)}
+.clockring .crf{stroke:var(--accent);stroke-linecap:round;transition:stroke-dasharray .25s ease}
+.clockstep .stepval{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;line-height:1;font-size:2.1rem}
+.clockstep .stepval small{font-size:.85rem;font-weight:600;color:var(--muted);margin-top:4px}
 .note{border:0;box-shadow:var(--shadow);font-family:var(--f-display);font-size:1.05rem}
 .cards{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .card{border-radius:var(--r-card);box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease}
@@ -1443,9 +1453,10 @@ button.wps{cursor:pointer}
     <div id="setup">
       <section class="step">
         <h2><span class="num">1</span>Hvað viltu lesa lengi?</h2>
-        <div class="stepper" role="group" aria-label="Lestrartími">
+        <div class="stepper clockstep" role="group" aria-label="Lestrartími">
           <button class="stepbtn" id="minus" type="button" aria-label="Styttri tími">−</button>
-          <output class="stepval" id="minVal" aria-live="polite">15 mín</output>
+          <div class="clockring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="crt" cx="60" cy="60" r="50"/><circle class="crf" id="minRing" cx="60" cy="60" r="50" pathLength="60" stroke-dasharray="15 60"/></svg>
+          <output class="stepval" id="minVal" aria-live="polite">15<small> mín</small></output></div>
           <button class="stepbtn" id="plus" type="button" aria-label="Lengri tími">+</button>
         </div>
       </section>
@@ -6664,7 +6675,7 @@ function renderAvatars(){const p=S.profiles[AVP],cur=avId(p,AVP);
 $('avGrid').addEventListener('click',e=>{const b=e.target.closest('[data-av]');if(!b||!AVP)return;S.profiles[AVP].avatar=b.dataset.av;save();renderAvatars()});
 $('avDone').addEventListener('click',()=>{renderStart();show('start')});
 $('switchBtn').addEventListener('click',()=>{if(T.active&&!T.done)return;if(T.done)endSession();renderStart();show('start')});
-function setMin(v){selMin=Math.max(1,Math.min(60,v));if(PR.settings.min!==selMin){PR.settings.min=selMin;save()}$('minVal').textContent=`${selMin} mín`;$('minus').disabled=selMin<=1;$('plus').disabled=selMin>=60}
+function setMin(v){selMin=Math.max(1,Math.min(60,v));if(PR.settings.min!==selMin){PR.settings.min=selMin;save()}$('minVal').innerHTML=`${selMin}<small> mín</small>`;$('minRing').setAttribute('stroke-dasharray',`${selMin} 60`);$('minus').disabled=selMin<=1;$('plus').disabled=selMin>=60}
 function holdStep(btn,d){let t1=0,t2=0;const stop=()=>{clearTimeout(t1);clearInterval(t2)};
   btn.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault();stop();setMin(selMin+d);t1=setTimeout(()=>{t2=setInterval(()=>{setMin(selMin+d);if(selMin<=1||selMin>=60)stop()},110)},450)});
   ['pointerup','pointerleave','pointercancel'].forEach(ev=>btn.addEventListener(ev,stop));document.addEventListener('pointerup',stop);
@@ -7713,14 +7724,27 @@ const TRIP=[
  ['Borgarnes','í Borgarnesi',-21.92,64.54,'Í Borgarnesi er Landnámssetrið. Þar er sagt frá Agli Skallagrímssyni, sem var bæði víkingur og skáld.'],
  ['Hvalfjarðargöng','í Hvalfjarðargöngum',-21.8,64.36,'Hvalfjarðargöng liggja undir sjóinn. Þau eru næstum sex kílómetra löng.'],
 ];
-const ISLCOAST=[[-22.7,63.82],[-22.65,64.0],[-22.0,64.15],[-21.7,64.35],[-22.0,64.5],[-22.35,64.62],[-23.0,64.8],[-24.05,64.88],[-23.3,64.98],[-22.6,65.05],[-22.2,65.08],[-21.78,65.1],[-22.1,65.22],[-22.4,65.33],[-22.0,65.38],[-21.92,65.46],[-22.15,65.47],[-22.35,65.58],[-22.55,65.5],[-22.75,65.6],[-23.0,65.52],[-23.2,65.58],[-23.45,65.52],[-23.85,65.5],[-24.15,65.47],[-24.53,65.5],[-24.4,65.58],[-24.05,65.57],[-24.05,65.63],[-24.25,65.64],[-23.85,65.66],[-24.1,65.71],[-23.95,65.75],[-23.55,65.68],[-23.2,65.73],[-23.55,65.8],[-23.85,65.82],[-23.6,65.87],[-23.3,65.86],[-23.55,65.93],[-23.7,66.0],[-23.45,66.03],[-23.6,66.08],[-23.5,66.13],[-23.35,66.16],[-23.15,66.07],[-22.9,66.05],[-22.6,65.95],[-22.45,66.05],[-22.7,66.15],[-22.95,66.25],[-23.15,66.38],[-22.95,66.45],[-22.4,66.46],[-22.1,66.38],[-21.8,66.2],[-21.55,66.05],[-21.45,65.85],[-21.6,65.75],[-21.95,65.7],[-21.55,65.68],[-21.35,65.6],[-21.5,65.53],[-21.25,65.45],[-21.15,65.2],[-20.95,65.38],[-20.85,65.6],[-20.75,65.73],[-20.6,65.6],[-20.35,65.7],[-20.0,66.08],[-19.6,65.8],[-19.4,66.08],[-18.9,66.18],[-18.55,66.05],[-18.2,65.78],[-18.1,66.12],[-17.5,66.15],[-16.9,66.12],[-16.5,66.2],[-16.0,66.53],[-15.3,66.3],[-14.55,66.38],[-15.0,66.1],[-14.6,65.8],[-14.3,65.6],[-13.6,65.5],[-13.5,65.2],[-13.6,65.0],[-14.0,64.7],[-14.6,64.45],[-15.1,64.28],[-15.8,64.1],[-16.5,63.85],[-17.4,63.75],[-18.1,63.55],[-18.9,63.4],[-19.6,63.5],[-20.3,63.7],[-21.0,63.83],[-21.8,63.83]];
+const ISLCOAST=[[-22.72,63.82],[-22.69,63.95],[-22.69,64.08],[-22.45,64.02],[-22.2,64.06],[-21.97,64.08],[-22.03,64.16],[-21.85,64.2],[-21.78,64.26],[-21.45,64.36],[-21.55,64.39],[-21.85,64.32],[-22.08,64.31],[-22.0,64.42],[-21.8,64.5],[-21.92,64.56],[-22.15,64.52],[-22.4,64.58],[-22.6,64.7],[-22.95,64.78],[-23.3,64.82],[-23.6,64.76],[-23.8,64.72],[-23.95,64.77],[-24.05,64.88],[-23.88,64.93],[-23.6,64.9],[-23.3,64.95],[-23.1,64.93],[-22.9,65.0],[-22.72,65.07],[-22.45,65.04],[-22.2,65.06],[-21.78,65.1],[-22.1,65.22],[-22.4,65.33],[-22.0,65.38],[-21.92,65.46],[-22.15,65.47],[-22.35,65.58],[-22.55,65.5],[-22.75,65.6],[-23.0,65.52],[-23.2,65.58],[-23.45,65.52],[-23.85,65.5],[-24.15,65.47],[-24.53,65.5],[-24.4,65.58],[-24.05,65.57],[-24.05,65.63],[-24.25,65.64],[-23.85,65.66],[-24.1,65.71],[-23.95,65.75],[-23.55,65.68],[-23.2,65.73],[-23.55,65.8],[-23.85,65.82],[-23.6,65.87],[-23.3,65.86],[-23.55,65.93],[-23.7,66.0],[-23.45,66.03],[-23.6,66.08],[-23.5,66.13],[-23.35,66.16],[-23.15,66.07],[-22.9,66.05],[-22.6,65.95],[-22.45,66.05],[-22.7,66.15],[-22.95,66.25],[-23.15,66.38],[-22.95,66.45],[-22.4,66.46],[-22.1,66.38],[-21.8,66.2],[-21.55,66.05],[-21.45,65.85],[-21.6,65.75],[-21.95,65.7],[-21.55,65.68],[-21.35,65.6],[-21.5,65.53],[-21.25,65.45],[-21.15,65.2],[-20.95,65.38],[-20.85,65.6],[-20.75,65.73],[-20.6,65.6],[-20.35,65.7],[-20.0,66.08],[-19.6,65.8],[-19.4,66.08],[-18.9,66.18],[-18.55,66.05],[-18.2,65.78],[-18.1,66.12],[-17.5,66.15],[-16.9,66.12],[-16.5,66.2],[-16.0,66.53],[-15.3,66.3],[-14.55,66.38],[-15.0,66.1],[-14.6,65.8],[-14.3,65.6],[-13.6,65.5],[-13.5,65.2],[-13.6,65.0],[-14.0,64.7],[-14.6,64.45],[-15.1,64.28],[-15.8,64.1],[-16.5,63.85],[-17.4,63.75],[-18.1,63.55],[-18.9,63.4],[-19.6,63.5],[-20.3,63.7],[-21.0,63.83],[-21.8,63.83]];
 const PX=(lo,la)=>[f1((lo+24.8)*35.2),f1((66.7-la)*84.4)];
+/* Jöklar (lengd, breidd), gróflega eftir raunverulegum útlínum */
+const GLACIERS=[
+ [[-18.3,64.47],[-18.05,64.66],[-17.7,64.79],[-17.2,64.81],[-16.6,64.76],[-16.1,64.72],[-15.75,64.6],[-15.45,64.45],[-15.5,64.32],[-15.85,64.26],[-16.25,64.12],[-16.7,63.98],[-17.15,64.05],[-17.55,64.2],[-17.95,64.3]],
+ [[-20.5,64.52],[-20.25,64.46],[-19.98,64.55],[-19.78,64.7],[-19.82,64.83],[-20.02,64.86],[-20.25,64.76],[-20.45,64.63]],
+ [[-19.12,64.72],[-18.82,64.68],[-18.62,64.76],[-18.66,64.88],[-18.9,64.93],[-19.12,64.85]],
+ [[-19.42,63.6],[-19.15,63.55],[-18.82,63.58],[-18.75,63.68],[-18.95,63.77],[-19.25,63.76],[-19.42,63.69]],
+ [[-19.75,63.62],[-19.55,63.6],[-19.5,63.65],[-19.62,63.68]],
+ [[-22.45,66.12],[-22.2,66.08],[-22.02,66.16],[-22.15,66.24],[-22.38,66.22]],
+ [[-23.98,64.8],[-23.8,64.765],[-23.6,64.79],[-23.62,64.835],[-23.8,64.86],[-23.95,64.845]],
+ [[-20.42,64.52],[-20.3,64.5],[-20.28,64.55],[-20.38,64.56]],
+ [[-18.0,64.72],[-17.85,64.7],[-17.82,64.76],[-17.95,64.77]],
+];
+const smoothPath=pts=>{const m=(a,b)=>[f1((a[0]+b[0])/2),f1((a[1]+b[1])/2)],n=pts.length;let d=`M${m(pts[n-1],pts[0]).join(' ')}`;for(let i=0;i<n;i++){const q=m(pts[i],pts[(i+1)%n]);d+=` Q${pts[i].join(' ')} ${q.join(' ')}`}return d+'Z'};
 function tripSVG(p,big){const n=p.trip||0,lap=Math.floor(n/TRIP.length),at=n%TRIP.length;
   const coast='M'+ISLCOAST.map(([a,b])=>PX(a,b).join(' ')).join(' L')+'Z',pts=TRIP.map(t=>PX(t[2],t[3]));
   const road='M'+pts.map(p=>p.join(' ')).join(' L')+'Z';
   const dots=pts.map((q,i)=>{const vis=lap>0||i<=at,cur=i===at;return `<g class="tstop${vis?' vis':''}" data-stop="${i}"><circle cx="${q[0]}" cy="${q[1]}" r="${big?16:0}" fill="transparent"/><circle cx="${q[0]}" cy="${q[1]}" r="${cur?7:4.5}" fill="${vis?'#FFD43A':'#FFFFFF'}" stroke="${vis?'#C98A00':'#7A8AA0'}" stroke-width="2"/>${big&&vis?`<text x="${Math.max(30,Math.min(370,q[0]))}" y="${q[1]-10}" text-anchor="middle" class="tlbl">${esc(TRIP[i][0])}</text>`:''}</g>`}).join('');
   const c=pts[at];
-  return `<svg viewBox="0 0 400 290" ${big?'role="img" aria-label="Kort af Íslandi með ferðaleiðinni"':'aria-hidden="true"'}><rect width="400" height="290" fill="#7CC8F5"/><path d="${coast}" fill="#A8D88A" stroke="#5A9A4A" stroke-width="2" stroke-linejoin="round"/><ellipse cx="${PX(-16.8,64.4)[0]}" cy="${PX(-16.8,64.4)[1]}" rx="34" ry="16" fill="#F2F6FA" opacity=".9"/><ellipse cx="${PX(-19.0,64.85)[0]}" cy="${PX(-19.0,64.85)[1]}" rx="12" ry="7" fill="#F2F6FA" opacity=".85"/><ellipse cx="${PX(-20.2,64.62)[0]}" cy="${PX(-20.2,64.62)[1]}" rx="12" ry="6" fill="#F2F6FA" opacity=".85"/><ellipse cx="${PX(-22.25,66.17)[0]}" cy="${PX(-22.25,66.17)[1]}" rx="8" ry="5" fill="#F2F6FA" opacity=".85"/><path d="${road}" fill="none" stroke="#C9262C" stroke-width="2.5" stroke-dasharray="5 4" opacity=".75"/>${dots}<g transform="translate(${c[0]} ${c[1]-14})"><path d="M0 12 C-10 0 -10 -12 0 -12 C10 -12 10 0 0 12Z" fill="#E0322C" stroke="#fff" stroke-width="2"/><circle cy="-3" r="4" fill="#fff"/></g></svg>`}
+  return `<svg viewBox="0 0 400 290" ${big?'role="img" aria-label="Kort af Íslandi með ferðaleiðinni"':'aria-hidden="true"'}><rect width="400" height="290" fill="#7CC8F5"/><path d="${coast}" fill="#A8D88A" stroke="#5A9A4A" stroke-width="2" stroke-linejoin="round"/>${GLACIERS.map(g=>`<path d="${smoothPath(g.map(([a,b])=>PX(a,b)))}" fill="#F2F6FA" stroke="#C9D8E6" stroke-width="1"/>`).join('')}<path d="${road}" fill="none" stroke="#C9262C" stroke-width="2.5" stroke-dasharray="5 4" opacity=".75"/>${dots}<g transform="translate(${c[0]} ${c[1]-14})"><path d="M0 12 C-10 0 -10 -12 0 -12 C10 -12 10 0 0 12Z" fill="#E0322C" stroke="#fff" stroke-width="2"/><circle cy="-3" r="4" fill="#fff"/></g></svg>`}
 function tripHTML(p){const n=p.trip||0,at=n%TRIP.length,lap=Math.floor(n/TRIP.length),t=TRIP[at],nx=TRIP[(at+1)%TRIP.length];
   return `<div class="tripmap">${tripSVG(p,false)}</div><div class="triptx"><span class="kind">Ferðalagið um Ísland</span><b>${n===0?'Ferðin byrjar í Reykjavík':`Þú ert ${t[1]}`}</b><p>${lap?`Hringur ${lap+1}. `:''}Hver lestrardagur færir þig á næsta stað. Næst: ${esc(nx[0])}.</p><button class="btn ghost small" type="button" id="tripOpen">Skoða kortið</button></div>`}
 function renderTrip(){const p=PR,n=p.trip||0,at=n%TRIP.length,lap=Math.floor(n/TRIP.length);$('tripBig').innerHTML=tripSVG(p,true);
