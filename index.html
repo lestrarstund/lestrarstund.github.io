@@ -1035,6 +1035,31 @@ body.onstart{background-image:radial-gradient(520px 420px at 0% 0%,rgba(150,195,
 .wsh{display:flex;justify-content:space-between;align-items:center;gap:10px}.wsh h3{margin:0}.wsh small{font-weight:600;color:var(--muted);font-size:.9rem;margin-left:6px}
 .wsum ul{margin:4px 0 0;padding-left:1.2em;display:grid;gap:6px;font-family:var(--f-read);font-size:1.05rem;line-height:1.45}.wsum li.quiet{color:var(--muted)}
 .lazyth{display:block;width:100%;aspect-ratio:5/3;background:linear-gradient(135deg,var(--surface-2),var(--line))}
+/* Leikir fyrir byrjendur */
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.gtile{position:relative;display:flex;align-items:center;gap:12px;border:0;background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:12px 14px;text-align:left;cursor:pointer;color:var(--ink);transition:transform .15s}
+.gtile:hover{transform:translateY(-3px)}.gtile:active{transform:scale(.97)}
+.gtic{flex:none;width:60px;height:60px;border-radius:16px;background:var(--sun-soft);display:grid;place-items:center}.gtic svg{width:50px;height:50px}
+.gttx{display:grid;gap:2px;min-width:0}.gttx b{font-size:1.1rem}.gttx small{color:var(--muted);font-size:.85rem}
+.gtdone{position:absolute;top:8px;right:10px;width:20px;color:var(--star)}.gtdone svg{width:100%;height:auto;display:block}
+#pgame{max-width:720px;margin-inline:auto}
+.pgbig{display:flex;flex-direction:column;align-items:center;gap:6px}.pgbig svg{width:110px;height:110px}
+.pgbig b{font-family:var(--f-read);font-size:2.2rem;letter-spacing:.02em}.pgbig .wgspk{margin-top:2px}
+.pgopts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pgopt{display:flex;flex-direction:column;align-items:center;gap:6px;border:3px solid var(--line);background:var(--surface-2);border-radius:18px;padding:10px 6px;cursor:pointer;color:var(--ink);min-height:64px;justify-content:center;transition:transform .12s}
+.pgopt:hover:not(:disabled){transform:translateY(-2px)}.pgopt svg{width:72px;height:72px}.pgopt span{font-family:var(--f-read);font-weight:700;font-size:1.1rem;min-height:1.3em}
+.pgopt.right{background:var(--leaf);border-color:var(--leaf-deep);color:#1C1C1E;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+.pgopt.wrong{background:var(--coral);border-color:var(--coral-deep);color:#1C1C1E;opacity:.6;animation:nope .4s}
+.pgtext .pgopt span{font-size:1.4rem}.pgl{font-size:2.4rem!important}.pgw{font-size:1.8rem!important}
+.pgsounds{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--f-read);font-weight:700;font-size:3rem}
+.pgsounds span{background:var(--sun-soft);border-radius:14px;padding:2px 14px}.pgsounds i{font-style:normal;color:var(--muted)}
+.pgch{display:inline-block;background:var(--sun);color:#1C1C1E;border-radius:10px;padding:0 10px;font-size:1.4em;text-transform:none}
+.pghl{background:var(--sun);color:#1C1C1E;border-radius:6px}
+.pgletter{font-family:var(--f-read);font-weight:700;font-size:6rem;line-height:1}
+.pgword{font-family:var(--f-read);font-weight:700;font-size:4rem;line-height:1.1}
+.pgbeads{display:flex;justify-content:center;gap:10px;min-height:22px}.pgbeads i{width:20px;height:20px;border-radius:50%;background:var(--line)}.pgbeads i.on{background:var(--star);animation:pop .3s}
+.pgdrum{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;cursor:pointer;font:800 1rem var(--f-display);color:var(--ink)}.pgdrum svg{width:96px;height:96px}
+.pgdrum:active:not(:disabled) svg{transform:scale(.92)}.pgdrum:disabled{opacity:.4}
 /* Byrjendur 5–6 ára: stærra letur og styttri línur */
 body.age5 .storytext{font-size:clamp(1.8rem,1.3rem + 2.2vw,2.5rem);line-height:1.7;max-width:26ch}
 body.age5 .storytext.fsm1{font-size:clamp(1.5rem,1.1rem + 1.8vw,2.1rem)}
@@ -1565,6 +1590,8 @@ button.wps{cursor:pointer}
       <div class="cards" id="cardsH"></div>
       <h3 class="grouphead" id="headA">Ævintýri</h3>
       <div class="cards" id="cardsA"></div>
+      <h3 class="grouphead" id="headG" hidden>Leikir með stafi og hljóð</h3>
+      <div class="gtiles" id="cardsG" hidden></div>
       <h3 class="grouphead" id="groupB">Sannar sögur um íþróttastjörnur</h3>
       <div class="cards" id="cardsB"></div>
       <h3 class="grouphead" id="headC">Saga og náttúra</h3>
@@ -1694,6 +1721,10 @@ button.wps{cursor:pointer}
     <div class="phead"><h2>Orðaleikurinn</h2><button class="btn ghost" id="wgClose" type="button">Hætta</button></div>
     <div id="wgBody"></div>
   </section>
+  <section id="pgame" hidden>
+    <div class="phead"><h2 id="pgTitle">Leikur</h2><button class="btn ghost" id="pgClose" type="button">Hætta</button></div>
+    <div id="pgBody"></div>
+  </section>
 
   <section id="advent" hidden>
     <div class="phead"><h2>Jóladagatalið</h2><button class="btn ghost" id="advBack" type="button">Til baka</button></div>
@@ -1812,7 +1843,7 @@ button.wps{cursor:pointer}
         <div class="ngh">Sameiginlegt</div><div class="ngrp" id="pNavShared"></div>
         <div class="ngh">Gögn</div><div class="ngrp" id="pNavData"></div>
         <div class="ngh">Hjálp</div><div class="ngrp" id="pNavHelp"></div>
-        <p class="pver" id="pVer">Lestrarstund · útgáfa 50</p>
+        <p class="pver" id="pVer">Lestrarstund · útgáfa 51</p>
       </nav>
       <div class="pmain">
         <button class="pback pback2" id="pBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Stillingar</button>
@@ -6586,6 +6617,7 @@ const BI={
 };
 const BW={api:'api',anamadkur:'ánamaðkur',bolti:'bolti',diskur:'diskur',blad:'blað',epli:'epli',el:'él',fiskur:'fiskur',gulrot:'gulrót',hus:'hús',iglu:'iglú',is:'ís',jardarber:'jarðarber',kottur:'köttur',lykill:'lykill',mus:'mús',nammi:'nammi',ostur:'ostur',olifa:'ólífa',peysa:'peysa',regnhlif:'regnhlíf',sol:'sól',tre:'tré',ugla:'ugla',ur:'úr',vettlingur:'vettlingur',lax:'lax',yddari:'yddari',ysa:'ýsa',thyrla:'þyrla',aer:'ær',ond:'önd'};
 const ico=(k,x,y,s=1)=>g(x,y,s,BI[k]);
+window.B5IC={BI,BW,ico,g,O,E};
 const bgSoft=(c1='#CFEAFB',c2='#F6FBFF',gr='#BDE7A8')=>`<rect width="400" height="240" fill="${c2}"/><rect width="400" height="150" fill="${c1}"/><path d="M0 160 Q200 140 400 162 V240 H0Z" fill="${gr}"/>`;
 /* Stafasíða: stór stafur vinstra megin og þrjú myndaspjöld hægra megin */
 const LCOL=['#FF6B6B','#4C7FE0','#2EAD6B','#F2A900','#B06FE0','#FF8A2B'];
@@ -6702,6 +6734,111 @@ Object.assign(STORIES,{
   d5:P('Músin segir íí, íí. Hver segir mjá?','b5_d5',null,['Hvað segir músin?',['Íí','Me','Bra']],'Músin segir íí',{end:'Öll dýrin',...T('Hver segir mjá? Ýttu á hann.','kottur','Lestu aftur. Hver sagði mjá?','Rétt! Kisa segir mjá.')}),
  }},
 });
+})();
+
+
+/* ================= Leikir fyrir byrjendur (5–6 ára) =================
+   Sjö stuttir leikir sem æfa hljóðkerfisvitund og stafaþekkingu: rím, atkvæði, hljóðasamruna,
+   staðsetningu hljóða, stóra og litla stafi, nafnið sitt og algengustu orðin.
+   Hver leikur er 6 umferðir. Allt að 3 stjörnur fyrir fyrsta skipti dagsins í hverjum leik.
+   Upplestur er notaður þar sem tækið styður íslensku, en allt er líka skrifað svo leikirnir virki alltaf. */
+(()=>{
+const {BI,BW,g,O,E}=window.B5IC;
+const PB={...BI,
+ hjol:`<circle cx="-16" cy="10" r="13" fill="none" stroke="#3A2A20" stroke-width="4"/><circle cx="18" cy="10" r="13" fill="none" stroke="#3A2A20" stroke-width="4"/><path d="M-16 10 L-4 -10 L14 -10 L18 10 M-4 -10 L2 10 L14 -10 M-8 -16 H2 M14 -10 L12 -20 H20" fill="none" stroke="#E8434A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`,
+ gris:`<path d="M-14 -14 L-16 -26 L-6 -18Z M14 -14 L16 -26 L6 -18Z" fill="#F49AB5" ${O}/><circle r="20" fill="#F7B6C6" ${O}/><ellipse cy="6" rx="9" ry="7" fill="#F49AB5" ${O}/><circle cx="-3" cy="6" r="1.6" fill="#3A2A20"/><circle cx="3" cy="6" r="1.6" fill="#3A2A20"/>${E(-8,-6)}${E(8,-6)}`,
+ hond:`<path d="M-14 26 V-2 Q-22 -8 -20 -16 Q-14 -18 -10 -8 V-22 Q-10 -28 -5 -28 Q0 -28 0 -22 V-26 Q0 -32 5 -32 Q10 -32 10 -26 V-22 Q10 -28 15 -28 Q20 -28 20 -22 V6 Q20 26 0 26Z" fill="#F2C9A8" ${O}/>`,
+ ros:`<path d="M0 0 V28" stroke="#3E8A3A" stroke-width="3"/><path d="M0 16 q-12 -2 -14 -10 q10 0 14 10Z" fill="#5FB45A" ${O}/><circle cy="-8" r="15" fill="#E8333C" ${O}/><path d="M-8 -10 Q0 -20 8 -10 Q0 -2 -8 -10Z M-4 -6 Q0 -12 6 -6" fill="none" stroke="#A31F2A" stroke-width="2"/>`,
+ ljos:`<path d="M-14 -6 Q-14 -28 0 -28 Q14 -28 14 -6 Q14 4 6 10 V16 H-6 V10 Q-14 4 -14 -6Z" fill="#FFE27A" ${O}/><rect x="-7" y="16" width="14" height="10" rx="2" fill="#9AA0A8" ${O}/>${[[-24,-16],[24,-16],[-26,0],[26,0],[0,-36]].map(([x,y])=>`<path d="M${x*0.8} ${y*0.8} L${x} ${y}" stroke="#F2A900" stroke-width="3" stroke-linecap="round"/>`).join('')}`,
+ pottur:`<path d="M-26 -10 H26 V14 Q26 26 14 26 H-14 Q-26 26 -26 14Z" fill="#7D8091" ${O}/><path d="M-30 -10 H30" stroke="#3A2A20" stroke-width="4" stroke-linecap="round"/><path d="M-26 0 H-34 M26 0 H34" stroke="#3A2A20" stroke-width="4" stroke-linecap="round"/><path d="M-10 -18 q-4 -6 0 -10 M2 -18 q-4 -6 0 -12 M14 -18 q-4 -6 0 -10" fill="none" stroke="#9AA0A8" stroke-width="2.4" stroke-linecap="round"/>`,
+};
+const PW={...BW,hjol:'hjól',gris:'grís',hond:'hönd',ros:'rós',ljos:'ljós',pottur:'pottur'};
+const BASE=Object.keys(BW);
+const pic=k=>`<svg viewBox="-42 -42 84 84" aria-hidden="true">${PB[k]||''}</svg>`;
+const canSay=()=>{try{return wcanSay('is-IS')}catch(e){return false}};
+const say=t=>{try{if(canSay())wsay(t,'is-IS')}catch(e){}};
+const sh=a=>shuffle(a.slice());
+const spk=t=>canSay()?`<button class="wgspk" type="button" data-pgsay="${esc(t)}" aria-label="Hlusta">${WSPK}</button>`:'';
+const nSyl=w=>{try{return Math.max(1,sylRule(w.toLowerCase()).n)}catch(e){return 1}};
+const pieces=w=>{try{return sylSplit(w)||[w]}catch(e){return [w]}};
+
+const PG=[
+ {id:'rim',t:'Rímleikur',d:'Hvaða orð rímar?',ic:'hus'},
+ {id:'atk',t:'Klappaðu atkvæðin',d:'Eitt klapp fyrir hvert atkvæði',ic:'bolti'},
+ {id:'sam',t:'Settu hljóðin saman',d:'s · ó · l verður sól',ic:'sol'},
+ {id:'hvar',t:'Hvar er hljóðið?',d:'Fremst, í miðju eða aftast',ic:'fiskur'},
+ {id:'stor',t:'Stóri og litli stafur',d:'Hvaða stafir eiga saman?',ic:'ugla'},
+ {id:'nafn',t:'Stafaðu nafnið þitt',d:'Raðaðu stöfunum',ic:'stelpa'},
+ {id:'ord',t:'Algengu orðin',d:'Orð sem koma oft fyrir',ic:'karfa'},
+];
+const RIM=[['mus','hus'],['sol','hjol'],['is','gris'],['ond','hond'],['ros','ljos'],['kottur','pottur']];
+const SIGHT=['og','er','í','á','það','ég','sá','hún','hann','við','þú','að','var','ekki','en','með','til','um','mamma','pabbi'];
+const SIMILAR={og:['ok','eg'],er:['ef','en'],í:['á','ú'],á:['í','ó'],það:['þar','því'],ég:['eg','og'],sá:['sú','sé'],hún:['hann','hin'],hann:['hún','hana'],við:['vit','yfir'],þú:['þá','þó'],að:['af','úr'],var:['vor','fer'],ekki:['eitt','enn'],en:['er','inn'],með:['menn','mér'],til:['tíu','tal'],um:['úr','inn'],mamma:['amma','manna'],pabbi:['abbi','pakki']};
+const LTR='AÁBDÐEÉFGHIÍJKLMNOÓPRSTUÚVXYÝÞÆÖ'.split('');
+const CONF={B:['D','P'],D:['B','Þ'],P:['B','R'],A:['Á','Ó'],Á:['A','Í'],O:['Ö','Ó'],Ö:['O','Ó'],Ó:['O','Ú'],U:['Ú','N'],Ú:['U','Ó'],I:['Í','L'],Í:['I','Ý'],Y:['Ý','V'],Ý:['Y','Í'],E:['É','F'],É:['E','Æ'],N:['M','U'],M:['N','W'],Þ:['D','P'],Ð:['D','O'],G:['Q','J'],J:['I','L']};
+const lowerOpts=(L,i)=>{const c=(CONF[L]||[]).filter(x=>x!==L);const o=[L,...c,...sh(LTR.filter(x=>x!==L&&!c.includes(x)))].slice(0,3);return sh(o)};
+
+function rounds(id){
+  if(id==='rim')return sh(RIM).map(([a,b])=>({a,b,opts:sh([b,...sh(BASE.filter(x=>x!==a&&x!==b)).slice(0,2)])}));
+  if(id==='atk'){const ws=['hus','sol','is','ur','bolti','epli','ugla','peysa','fiskur','kottur','olifa','jardarber','vettlingur','yddari','anamadkur','regnhlif'];
+    const by={};ws.forEach(k=>{const n=nSyl(PW[k]);(by[n]=by[n]||[]).push(k)});const out=[];
+    for(let r=0;r<6;r++){const ns=Object.keys(by).filter(n=>by[n].length);const n=ns[r%ns.length];const k=by[n].splice(Math.floor(Math.random()*by[n].length),1)[0];out.push({k,n:+n,c:0})}return sh(out)}
+  if(id==='sam'){const ws=sh(Object.keys(PW).filter(k=>PW[k].length>=2&&PW[k].length<=5&&!/\s/.test(PW[k]))).slice(0,6);
+    return ws.map(k=>({k,opts:sh([k,...sh(Object.keys(PW).filter(x=>x!==k&&PW[x][0]!==PW[k][0])).slice(0,2)])}))}
+  if(id==='hvar'){const out=[],types=sh(['fremst','miðju','aftast','fremst','miðju','aftast']),used=new Set();
+    for(const t of types){for(const k of sh(BASE)){if(used.has(k))continue;const w=PW[k];if(w.length<3||/\s/.test(w))continue;
+        const idx=t==='fremst'?0:t==='aftast'?w.length-1:1+Math.floor(Math.random()*(w.length-2)),ch=w[idx];
+        if(w.split('').filter(x=>x===ch).length!==1)continue;used.add(k);out.push({k,ch,t});break}}
+    return out}
+  if(id==='stor')return sh(LTR.filter(x=>x!=='Ð'&&x!=='X')).slice(0,6).map((L,i)=>i%2?{L,up:true,opts:lowerOpts(L,i)}:{L,up:false,opts:lowerOpts(L,i)});
+  if(id==='nafn'){const nm=String((PR&&PR.name)||'').trim(),ok=/^[A-Za-zÁÐÉÍÓÚÝÞÆÖáðéíóúýþæö]{2,10}$/.test(nm);
+    const ws=sh(Object.keys(PW).filter(k=>PW[k].length>=3&&PW[k].length<=5&&!/\s/.test(PW[k]))).slice(0,ok?3:4);
+    const list=[...(ok?[{w:nm,name:true}]:[]),...ws.map(k=>({w:PW[k],k}))];
+    return list.map(o=>{const w=o.w.toLowerCase();let t=[...w].map((c,j)=>({c,j,used:false}));for(let n=0;n<6&&t.map(x=>x.c).join('')===w;n++)t=sh(t);return {...o,w,tiles:t,built:[]}})}
+  if(id==='ord')return sh(SIGHT).slice(0,6).map(w=>({w,shown:true,opts:sh([w,...(SIMILAR[w]||sh(SIGHT.filter(x=>x!==w)).slice(0,2))])}));
+  return []}
+
+let PGS=null;
+function startPG(id){const gm=PG.find(x=>x.id===id);if(!gm)return;PGS={id,gm,r:rounds(id),i:0,score:0,done:false};$('pgTitle').textContent=gm.t;show('pgame');renderPG();
+  const r=PGS.r[0];if(r)autoSay(r)}
+function autoSay(r){const id=PGS.id;if(id==='rim')say(PW[r.a]);else if(id==='atk')say(PW[r.k]);else if(id==='sam')say([...PW[r.k]].join(', '));else if(id==='hvar')say(PW[r.k])}
+function renderPG(){const s=PGS,b=$('pgBody');if(!s)return;
+  const dots=`<div class="wgdots">${s.r.map((r,i)=>`<i class="${i<s.i?(r.first?'ok':'no'):i===s.i?'cur':''}"></i>`).join('')}</div>`;
+  if(s.i>=s.r.length){const n=s.r.length,st=s.score>=n?3:s.score>=Math.ceil(n*.6)?2:s.score>0?1:0,today=dkey(new Date());PR.pgDay=PR.pgDay||{};const first=PR.pgDay[s.id]!==today;
+    if(!s.done){s.done=true;if(first&&st>0){PR.pgDay[s.id]=today;addStars(PR,st)}else save()}
+    b.innerHTML=`<div class="wgcard wgend"><div class="wgstars">${[0,1,2].map(i=>`<span class="${i<st?'on':''}">${STARSVG}</span>`).join('')}</div><h3>${st===3?'Frábært!':st===2?'Vel gert!':st===1?'Góð byrjun!':'Æfingin skapar meistarann!'}</h3><p>Þú gerðir ${s.score} af ${n} rétt í fyrstu tilraun.</p><p class="pmuted">${first&&st>0?`Þú fékkst ${st===1?'eina stjörnu':st+' stjörnur'}.`:st>0?'Stjörnur fást fyrir fyrsta skiptið í dag, en þú mátt spila eins oft og þú vilt.':''}</p><div class="actions"><button class="btn primary" type="button" data-pg="again">Spila aftur</button><button class="btn ghost" type="button" data-pg="home">Fleiri leikir</button></div></div>`;return}
+  const r=s.r[s.i];let body='';
+  const opt=(v,inner,cls='')=>`<button type="button" class="pgopt ${cls}${r.pick===v?(r.ok?' right':' wrong'):''}${(r.wrongs||[]).includes(v)?' wrong':''}" data-pv="${esc(String(v))}" ${r.ok?'disabled':''}>${inner}</button>`;
+  if(s.id==='rim')body=`<p class="wgq">Hvað rímar við</p><div class="pgbig">${pic(r.a)}<b>${esc(PW[r.a])}</b>${spk(PW[r.a])}</div><div class="pgopts">${r.opts.map(k=>opt(k,`${pic(k)}<span>${esc(PW[k])}</span>`)).join('')}</div>`;
+  else if(s.id==='atk')body=`<p class="wgq">Klappaðu einu sinni fyrir hvert atkvæði</p><div class="pgbig">${pic(r.k)}<b>${esc(r.ok?pieces(PW[r.k]).join('·'):PW[r.k])}</b>${spk(PW[r.k])}</div><div class="pgbeads">${Array.from({length:Math.max(r.c,1)},(_,i)=>`<i class="${i<r.c?'on':''}"></i>`).join('')}</div><div class="actions"><button type="button" class="pgdrum" data-pg="clap" ${r.ok?'disabled':''} aria-label="Klapp"><svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="22" rx="24" ry="9" fill="#FFE27A" stroke="#3A2A20" stroke-width="3"/><path d="M8 22 V44 Q32 56 56 44 V22" fill="#E8434A" stroke="#3A2A20" stroke-width="3"/><path d="M8 30 L20 50 M32 32 L32 53 M56 30 L44 50" stroke="#FFE27A" stroke-width="3"/></svg>Klapp</button></div><div class="actions"><button type="button" class="btn ghost small" data-pg="reset" ${!r.c||r.ok?'disabled':''}>Byrja aftur</button><button type="button" class="btn primary" data-pg="check" ${!r.c||r.ok?'disabled':''}>Athuga</button></div>`;
+  else if(s.id==='sam')body=`<p class="wgq">Settu hljóðin saman. Hvaða orð er þetta?</p><div class="pgsounds">${[...PW[r.k]].map(c=>`<span>${esc(c)}</span>`).join('<i>·</i>')}${spk([...PW[r.k]].join(', '))}</div><div class="pgopts">${r.opts.map(k=>opt(k,`${pic(k)}<span>${r.ok?esc(PW[k]):''}</span>`)).join('')}</div>`;
+  else if(s.id==='hvar')body=`<p class="wgq">Hvar heyrist <b class="pgch">${esc(r.ch)}</b> í orðinu?</p><div class="pgbig">${pic(r.k)}<b>${[...PW[r.k]].map(c=>`<span class="${r.ok&&c===r.ch?'pghl':''}">${esc(c)}</span>`).join('')}</b>${spk(PW[r.k])}</div><div class="pgopts pgtext">${[['fremst','Fremst'],['miðju','Í miðju'],['aftast','Aftast']].map(([v,l])=>opt(v,`<span>${l}</span>`)).join('')}</div>`;
+  else if(s.id==='stor')body=`<p class="wgq">${r.up?'Finndu litla stafinn':'Finndu stóra stafinn'}</p><div class="pgletter">${esc(r.up?r.L:r.L.toLowerCase())}</div><div class="pgopts pgtext">${r.opts.map(L=>opt(L,`<span class="pgl">${esc(r.up?L.toLowerCase():L)}</span>`)).join('')}</div>`;
+  else if(s.id==='nafn')body=`<p class="wgq">${r.name?'Raðaðu stöfunum í nafninu þínu':'Raðaðu stöfunum í orðinu'}</p>${r.name?'':`<div class="pgbig">${pic(r.k)}${spk(r.w)}</div>`}<div class="wgslots${r.state?' '+r.state:''}">${[...r.w].map((c,j)=>`<span>${r.built[j]?esc(r.built[j].c.toUpperCase()):''}</span>`).join('')}</div><div class="wgtiles">${r.tiles.map((t,j)=>`<button type="button" class="wgtile" data-pt="${j}" ${t.used||r.ok?'disabled':''}>${esc(t.c.toUpperCase())}</button>`).join('')}</div><div class="actions"><button type="button" class="btn ghost small" data-pg="undo" ${!r.built.length||r.ok?'disabled':''}>Taka til baka</button></div>`;
+  else if(s.id==='ord')body=r.shown?`<p class="wgq">Horfðu vel á orðið</p><div class="pgword">${esc(r.w)}</div>${spk(r.w)}<div class="actions"><button type="button" class="btn primary" data-pg="hide">Ég man það!</button></div>`:`<p class="wgq">Hvaða orð sástu?</p><div class="pgopts pgtext">${r.opts.map(w=>opt(w,`<span class="pgw">${esc(w)}</span>`)).join('')}</div>${r.wrongs&&r.wrongs.length&&!r.ok?`<div class="actions"><button type="button" class="btn ghost small" data-pg="peek">Sjá orðið aftur</button></div>`:''}`;
+  b.innerHTML=dots+`<div class="wgcard${r.ok?' wgok':''}">${body}<p class="wgfeed" aria-live="polite">${r.ok?(r.first?'Rétt í fyrstu tilraun!':'Rétt!'):r.miss?'Ekki alveg. Reyndu aftur!':''}</p>${r.ok?`<div class="actions"><button type="button" class="btn primary" data-pg="next">${s.i+1<s.r.length?'Áfram':'Sjá útkomuna'}</button></div>`:''}</div>`}
+function pgDone(ok){const s=PGS,r=s.r[s.i];if(ok){r.ok=true;r.first=!r.miss;if(r.first)s.score++}else r.miss=true;renderPG()}
+document.addEventListener('click',e=>{if(!e.target.closest('#pgBody'))return;const s=PGS;if(!s)return;const r=s.r[s.i];
+  const sy=e.target.closest('[data-pgsay]');if(sy){say(sy.dataset.pgsay);return}
+  const a=e.target.closest('[data-pg]');const act=a&&a.dataset.pg;
+  if(act==='again'){startPG(s.id);return}if(act==='home'){renderStart();renderHome();show('home');setTimeout(()=>{const h=$('headG');h&&h.scrollIntoView({block:'start'})},50);return}
+  if(act==='next'){s.i++;renderPG();const n=s.r[s.i];if(n)autoSay(n);return}
+  if(!r||r.ok)return;
+  if(act==='clap'){r.c=Math.min(r.c+1,8);renderPG();return}
+  if(act==='reset'){r.c=0;renderPG();return}
+  if(act==='check'){if(r.c===r.n)pgDone(true);else{r.c=0;pgDone(false)}return}
+  if(act==='hide'){r.shown=false;say(r.w);renderPG();return}
+  if(act==='peek'){r.shown=true;renderPG();return}
+  if(act==='undo'){const l=r.built.pop();if(l)l.used=false;r.state='';renderPG();return}
+  const t=e.target.closest('[data-pt]');if(t){const tile=r.tiles[+t.dataset.pt];if(tile.used)return;tile.used=true;r.built.push(tile);r.state='';
+    if(r.built.length===r.w.length){if(r.built.map(x=>x.c).join('')===r.w){r.state='right';pgDone(true)}else{r.state='wrong';r.tiles.forEach(x=>x.used=false);r.built=[];pgDone(false)}}else renderPG();return}
+  const o=e.target.closest('[data-pv]');if(o){const v=o.dataset.pv,right=s.id==='rim'?v===r.b:s.id==='sam'?v===r.k:s.id==='hvar'?v===r.t:s.id==='stor'?v===r.L:s.id==='ord'?v===r.w:false;
+    if(right){r.pick=v;pgDone(true)}else{r.wrongs=[...(r.wrongs||[]),v];pgDone(false)}}});
+document.addEventListener('click',e=>{if(!e.target.closest('#pgClose'))return;PGS=null;renderHome();show('home')});
+window.renderGameTiles=function(){const on=!!PR&&PR.age===5,h=$('headG'),c=$('cardsG');if(!h||!c)return;h.hidden=!on;c.hidden=!on;if(!on){c.innerHTML='';return}
+  const today=dkey(new Date()),pd=PR.pgDay||{};
+  c.innerHTML=PG.map(x=>`<button type="button" class="gtile" data-game="${x.id}"><span class="gtic">${pic(x.ic)}</span><span class="gttx"><b>${x.t}</b><small>${x.d}</small></span>${pd[x.id]===today?`<span class="gtdone" aria-label="Spilað í dag">${STARSVG}</span>`:''}</button>`).join('')};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-game]');if(t)startPG(t.dataset.game)});
 })();
 
 for(const st of Object.values(STORIES)){
@@ -6862,7 +6999,7 @@ function statQuit(r){if(!r||r.ended||r.quitSent||!r.path||!r.path.length)return;
    Ef villa kemur upp í appinu er send stutt tilkynning í errors/: villuboðin, skrá og lína, útgáfa appsins,
    tegund vafra (t.d. Safari), gerð tækis (sími/spjald/tölva), dagsetning og skjámynd. Ekkert um notandann.
    Mest 5 tilkynningar í hverri heimsókn og hver villa aðeins einu sinni. */
-const APPV='50';
+const APPV='51';
 const ERRSEEN=new Set();
 function errBrowser(){const u=navigator.userAgent||'';return /Edg\//.test(u)?'Edge':/SamsungBrowser/.test(u)?'Samsung':/Firefox\//.test(u)?'Firefox':/CriOS|Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'Annað'}
 function errSend(msg,src){try{if(!FB_CONFIG||window.__LS_NOSTAT||navigator.onLine===false)return;msg=String(msg||'').slice(0,300);src=String(src||'').replace(/^https?:\/\/[^/]+\//,'').slice(0,160);
@@ -7017,7 +7154,7 @@ function toast(title,sub,{kind='calm',persist=false,ms=7000}={}){
 }
 
 /* ================= Heim ================= */
-const SECTIONS=['welcome','onb','tour','ready','guide','mapall','legal','start','home','read','quiz','reward','lock','parent','done','words','advent','trip','world','wcountry','wpass','wopen','buddy','maker','avatars','homeread','stats','wgame'];
+const SECTIONS=['welcome','onb','tour','ready','guide','mapall','legal','start','home','read','quiz','reward','lock','parent','done','words','advent','trip','world','wcountry','wpass','wopen','buddy','maker','avatars','homeread','stats','wgame','pgame'];
 function show(id){document.body.classList.toggle('onstart',id==='start');if(id!=='read'&&typeof REC!=='undefined'&&REC.mr)recStop();for(const s of SECTIONS)$(s).hidden=s!==id;window.scrollTo(0,0)}
 let selMin=15;
 function weekCount(p){const now=new Date(),mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()+6)%7));let n=0;for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);if(p.days.includes(dkey(d)))n++}return n}
@@ -7133,7 +7270,7 @@ function renderHome(){
   const all=Object.values(STORIES);
   const grp=g=>g==='h'?[]:all.filter(s=>s.age===PR.age&&s.group===g);
   $('headM').textContent=`Sögur sem ${nm(S.profiles.p9)} skrifaði`;
-  for(const [g,c,hd] of [['p','cardsP','headP'],['h','cardsH','headH'],['a','cardsA','headA'],['b','cardsB','groupB'],['c','cardsC','headC'],['m','cardsM','headM']]){const L=grp(g);$(c).innerHTML=L.map(card).join('');$(c).hidden=!L.length;$(hd).hidden=!L.length}
+  for(const [g,c,hd] of [['p','cardsP','headP'],['h','cardsH','headH'],['a','cardsA','headA'],['b','cardsB','groupB'],['c','cardsC','headC'],['m','cardsM','headM']]){const L=grp(g);$(c).innerHTML=L.map(card).join('');$(c).hidden=!L.length;$(hd).hidden=!L.length}renderGameTiles();
   const firstHead=['headP','headH','headA','groupB','headC','headM'].find(x=>!$(x).hidden);['headP','headH','headA','groupB','headC','headM'].forEach(x=>$(x).classList.toggle('first',x===firstHead));
   const jo=jumpOpen(PR);$('jumpBox').hidden=!jo;$('cardsJ').innerHTML=jo?jumpStories().map(card).join(''):'';renderLib();renderLibAlt();
   if(jo&&!PR.jumpSeen&&PR.settings.jump!=='on'){PR.jumpSeen=true;save();setTimeout(()=>toast('Nýjar sögur opnuðust!','Þú lest svo vel að nú máttu prófa sögur fyrir 9–10 ára.',{kind:'done',ms:9000}),400)}
