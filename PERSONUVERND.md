@@ -26,7 +26,7 @@ Aðeins foreldrar og forráðamenn, 18 ára og eldri, geta stofnað aðgang. For
 - Fornafn eða gælunafn. Við mælum með að nota aðeins fornafn eða gælunafn.
 - Aldur eða aldursbil, erfiðleikastig og valin persóna. Persónan er annaðhvort teiknuð persóna úr appinu eða eigin karakter sem barnið setur saman úr teiknuðum hlutum (til dæmis hárgreiðslu, litum og fötum). Hvorugt er mynd af barninu.
 - Lestrarsaga: hvaða sögur eru lesnar, mínútur, stjörnur, svör við spurningum í lok sagna og áætlaður leshraði.
-- Heimalestur sem foreldri skráir: dagsetning, mínútur og bókarheiti ef það er skráð.
+- Heimalestur sem foreldri skráir eða staðfestir: dagsetning, mínútur og bókarheiti og blaðsíður ef það er skráð.
 
 **Radd- og hljóðupptökur**
 
