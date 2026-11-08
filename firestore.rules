@@ -40,6 +40,39 @@ service cloud.firestore {
       }
     }
 
+    // Nafnlaus talning á notkun sagna (storyStats/{saga}, .../ends/{síða}, .../quits/{síða}).
+    // Hver sem er má hækka teljara um nákvæmlega einn; aðeins umsjónarmaður má lesa.
+    // Engin persónuauðkenni eru geymd í þessum skjölum.
+    function isAdmin() {
+      return signedIn() && request.auth.token.email == 'aronamagnusson@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+    function idOk(x) { return x.matches('^[A-Za-z0-9_]{1,40}$'); }
+    function statKeys() { return ['started', 'finished', 's7', 's9', 'f7', 'f9']; }
+    function newStep(k) { return !(k in request.resource.data) || request.resource.data[k] == 1; }
+    function updStep(k) {
+      return request.resource.data.get(k, 0) == resource.data.get(k, 0)
+        || request.resource.data.get(k, 0) == resource.data.get(k, 0) + 1;
+    }
+    match /storyStats/{sid} {
+      allow read: if isAdmin();
+      allow create: if idOk(sid) && request.resource.data.keys().hasOnly(statKeys())
+        && newStep('started') && newStep('finished') && newStep('s7') && newStep('s9') && newStep('f7') && newStep('f9');
+      allow update: if idOk(sid) && request.resource.data.keys().hasOnly(statKeys())
+        && updStep('started') && updStep('finished') && updStep('s7') && updStep('s9') && updStep('f7') && updStep('f9');
+
+      match /{kind}/{pid} {
+        allow read: if isAdmin();
+        allow create: if (kind == 'ends' || kind == 'quits') && idOk(pid)
+          && request.resource.data.keys().hasOnly(['n']) && request.resource.data.n == 1;
+        allow update: if (kind == 'ends' || kind == 'quits') && idOk(pid)
+          && request.resource.data.keys().hasOnly(['n']) && request.resource.data.n == resource.data.n + 1;
+      }
+    }
+    // Yfirlitið les alla enda og hættusíður í einu (collection group)
+    match /{path=**}/ends/{pid} { allow read: if isAdmin(); }
+    match /{path=**}/quits/{pid} { allow read: if isAdmin(); }
+
     // Boðskóðar: 8 stafa kóði sem gildir í 7 daga
     match /invites/{code} {
       allow get: if signedIn();
