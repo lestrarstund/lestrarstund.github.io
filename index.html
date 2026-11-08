@@ -1043,7 +1043,7 @@ body.onstart{background-image:radial-gradient(520px 420px at 0% 0%,rgba(150,195,
 .gttx{display:grid;gap:2px;min-width:0}.gttx b{font-size:1.1rem}.gttx small{color:var(--muted);font-size:.85rem}
 .gtdone{position:absolute;top:8px;right:10px;width:20px;color:var(--star)}.gtdone svg{width:100%;height:auto;display:block}
 #pgame{max-width:720px;margin-inline:auto}
-.pgbig{display:flex;flex-direction:column;align-items:center;gap:6px}.pgbig svg{width:110px;height:110px}
+.pgbig{display:flex;flex-direction:column;align-items:center;gap:6px}.pgbig>svg{width:110px;height:110px}.pgbig .wgspk svg{width:18px;height:18px}.pgsounds .wgspk{font-size:1rem}
 .pgbig b{font-family:var(--f-read);font-size:2.2rem;letter-spacing:.02em}.pgbig .wgspk{margin-top:2px}
 .pgopts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .pgopt{display:flex;flex-direction:column;align-items:center;gap:6px;border:3px solid var(--line);background:var(--surface-2);border-radius:18px;padding:10px 6px;cursor:pointer;color:var(--ink);min-height:64px;justify-content:center;transition:transform .12s}
@@ -1051,6 +1051,12 @@ body.onstart{background-image:radial-gradient(520px 420px at 0% 0%,rgba(150,195,
 .pgopt.right{background:var(--leaf);border-color:var(--leaf-deep);color:#1C1C1E;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
 .pgopt.wrong{background:var(--coral);border-color:var(--coral-deep);color:#1C1C1E;opacity:.6;animation:nope .4s}
 .pgtext .pgopt span{font-size:1.4rem}.pgl{font-size:2.4rem!important}.pgw{font-size:1.8rem!important}
+.pgopts.pgrimt{grid-template-columns:1fr;max-width:340px;margin:0 auto}
+.pgrimt .pgopt{flex-direction:row;justify-content:space-between;padding:10px 12px 10px 22px;min-height:66px}
+.pgopt .pgrw{font-size:1.7rem;line-height:1.15;hyphens:manual;text-align:left}
+.pgopt .pgrw.pglong{font-size:1.5rem}
+.pgopt .pgosay{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;min-height:0;border-radius:50%;background:var(--surface);border:2px solid var(--line)}
+.pgopt .pgosay svg{width:18px;height:18px}
 .pgsounds{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--f-read);font-weight:700;font-size:3rem}
 .pgsounds span{background:var(--sun-soft);border-radius:14px;padding:2px 14px}.pgsounds i{font-style:normal;color:var(--muted)}
 .pgch{display:inline-block;background:var(--sun);color:#1C1C1E;border-radius:10px;padding:0 10px;font-size:1.4em;text-transform:none}
@@ -1843,7 +1849,7 @@ button.wps{cursor:pointer}
         <div class="ngh">Sameiginlegt</div><div class="ngrp" id="pNavShared"></div>
         <div class="ngh">Gögn</div><div class="ngrp" id="pNavData"></div>
         <div class="ngh">Hjálp</div><div class="ngrp" id="pNavHelp"></div>
-        <p class="pver" id="pVer">Lestrarstund · útgáfa 51</p>
+        <p class="pver" id="pVer">Lestrarstund · útgáfa 54</p>
       </nav>
       <div class="pmain">
         <button class="pback pback2" id="pBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Stillingar</button>
@@ -6738,8 +6744,10 @@ Object.assign(STORIES,{
 
 
 /* ================= Leikir fyrir byrjendur (5–6 ára) =================
-   Sjö stuttir leikir sem æfa hljóðkerfisvitund og stafaþekkingu: rím, atkvæði, hljóðasamruna,
-   staðsetningu hljóða, stóra og litla stafi, nafnið sitt og algengustu orðin.
+   Þrír stuttir leikir sem æfa hljóðkerfisvitund og lestur: rím, atkvæði og algengustu orðin.
+   (Hljóðasamruni, staðsetning hljóða, stórir og litlir stafir og nafnið voru tekin út 2026-11-08.)
+   Kóðinn fyrir þá er enn í rounds()/renderPG() ef þeir verða endurbættir síðar.
+
    Hver leikur er 6 umferðir. Allt að 3 stjörnur fyrir fyrsta skipti dagsins í hverjum leik.
    Upplestur er notaður þar sem tækið styður íslensku, en allt er líka skrifað svo leikirnir virki alltaf. */
 (()=>{
@@ -6765,13 +6773,17 @@ const pieces=w=>{try{return sylSplit(w)||[w]}catch(e){return [w]}};
 const PG=[
  {id:'rim',t:'Rímleikur',d:'Hvaða orð rímar?',ic:'hus'},
  {id:'atk',t:'Klappaðu atkvæðin',d:'Eitt klapp fyrir hvert atkvæði',ic:'bolti'},
- {id:'sam',t:'Settu hljóðin saman',d:'s · ó · l verður sól',ic:'sol'},
- {id:'hvar',t:'Hvar er hljóðið?',d:'Fremst, í miðju eða aftast',ic:'fiskur'},
- {id:'stor',t:'Stóri og litli stafur',d:'Hvaða stafir eiga saman?',ic:'ugla'},
- {id:'nafn',t:'Stafaðu nafnið þitt',d:'Raðaðu stöfunum',ic:'stelpa'},
  {id:'ord',t:'Algengu orðin',d:'Orð sem koma oft fyrir',ic:'karfa'},
 ];
-const RIM=[['mus','hus'],['sol','hjol'],['is','gris'],['ond','hond'],['ros','ljos'],['kottur','pottur']];
+// Rímpör: „orð rímorð truflorð“. Stig 1 eru eitt atkvæði, stig 2 tvö atkvæði.
+const RIM1='mús hús bíll,sól hjól bók,ís grís hundur,rós ljós tré,önd hönd svanur,hár tár nef,sár klár skór,lás ás lykill,bál skál pottur,nál mál tvinni,kál sál epli,tá brá hönd,tré hné lauf,sjór stór bátur,snjór kór regn,dýr nýr gamall,gull ull silfur,fjall pall dalur,gras glas blóm,barn garn leikur,björn börn refur,strönd hönd sjór,önd bönd svanur,brauð rauð mjólk,kinn sinn munnur,bil gil vegur,grein hrein rót,skegg egg þak,blóm tóm gras,bátur kátur skip,fiskur diskur gaffall,hundur lundur köttur,vindur kindur stormur,hestur gestur folald,prestur vestur kirkja,land band fjara,fótur ljótur skór,kjóll stóll borð,bíll fíll hjól,matur latur diskur,haf kaf alda,bolur holur buxur,nótt sótt dagur,ljón tjón tígrisdýr,eldur feldur reykur,þak bak gluggi';
+const RIM2='kaka baka brauð,húfa dúfa vettlingur,bolti holti mark,sofa lofa vakna,hlaupa kaupa ganga,krakki bakki skóli,amma mamma afi,tappi kappi flaska,stjarna barna tungl,vetur betur sumar,sumar humar sól,fingur hringur hönd,magi lagi haus,auga lauga nef,eyra heyra sjá,gluggi skuggi hurð,lampi svampi ljós,koddi oddi sæng,skóli stóli bekkur,penni kenni blýantur,taska flaska poki,jakki pakki úlpa,sokkur kokkur skór,pottur vottur panna,kúla súla hringur,skoppa hoppa sitja,dansa kransa syngja,syngja hringja hlusta,brosa losa hlæja,gráta láta kátur,vakna sakna sofa,ugla rugla hrafn,refur vefur greni,svanur vanur tjörn,hvalur dalur haf,selur velur fjara,krabbi pabbi skel,lundi undi klettur,kría fría egg,fluga duga vængur';
+const rimList=s=>s.split(',').map(x=>x.split(' '));
+const RIM=[rimList(RIM1),rimList(RIM2)];
+// Rím er borið saman frá fyrsta sérhljóði; i/y og í/ý hljóma eins
+const rimEnd=w=>w.toLowerCase().replace(/y/g,'i').replace(/ý/g,'í').replace(/^[^aáeéiíoóuúæö]+/,'');
+const PICOF={};Object.keys(PW).forEach(k=>{if(PB[k])PICOF[PW[k]]=k});
+const RIMPOOL=[...new Set(RIM.flat(2))];
 const SIGHT=['og','er','í','á','það','ég','sá','hún','hann','við','þú','að','var','ekki','en','með','til','um','mamma','pabbi'];
 const SIMILAR={og:['ok','eg'],er:['ef','en'],í:['á','ú'],á:['í','ó'],það:['þar','því'],ég:['eg','og'],sá:['sú','sé'],hún:['hann','hin'],hann:['hún','hana'],við:['vit','yfir'],þú:['þá','þó'],að:['af','úr'],var:['vor','fer'],ekki:['eitt','enn'],en:['er','inn'],með:['menn','mér'],til:['tíu','tal'],um:['úr','inn'],mamma:['amma','manna'],pabbi:['abbi','pakki']};
 const LTR='AÁBDÐEÉFGHIÍJKLMNOÓPRSTUÚVXYÝÞÆÖ'.split('');
@@ -6779,7 +6791,12 @@ const CONF={B:['D','P'],D:['B','Þ'],P:['B','R'],A:['Á','Ó'],Á:['A','Í'],O:[
 const lowerOpts=(L,i)=>{const c=(CONF[L]||[]).filter(x=>x!==L);const o=[L,...c,...sh(LTR.filter(x=>x!==L&&!c.includes(x)))].slice(0,3);return sh(o)};
 
 function rounds(id){
-  if(id==='rim')return sh(RIM).map(([a,b])=>({a,b,opts:sh([b,...sh(BASE.filter(x=>x!==a&&x!==b)).slice(0,2)])}));
+  if(id==='rim')return [...sh(RIM[0]).slice(0,5),...sh(RIM[1]).slice(0,3)].map(([a,b,d])=>{
+      const ok=x=>x!==a&&x!==b&&x!==d&&rimEnd(x)!==rimEnd(a)&&rimEnd(x)!==rimEnd(b);
+      const withPic=PICOF[b]&&PICOF[d];
+      const pool=withPic?Object.keys(PICOF).filter(ok):RIMPOOL.filter(ok);
+      const e=sh(pool)[0];
+      return {a,b,pm:!!(withPic&&PICOF[e]),opts:sh([b,d,e])}});
   if(id==='atk'){const ws=['hus','sol','is','ur','bolti','epli','ugla','peysa','fiskur','kottur','olifa','jardarber','vettlingur','yddari','anamadkur','regnhlif'];
     const by={};ws.forEach(k=>{const n=nSyl(PW[k]);(by[n]=by[n]||[]).push(k)});const out=[];
     for(let r=0;r<6;r++){const ns=Object.keys(by).filter(n=>by[n].length);const n=ns[r%ns.length];const k=by[n].splice(Math.floor(Math.random()*by[n].length),1)[0];out.push({k,n:+n,c:0})}return sh(out)}
@@ -6801,7 +6818,7 @@ function rounds(id){
 let PGS=null;
 function startPG(id){const gm=PG.find(x=>x.id===id);if(!gm)return;PGS={id,gm,r:rounds(id),i:0,score:0,done:false};$('pgTitle').textContent=gm.t;show('pgame');renderPG();
   const r=PGS.r[0];if(r)autoSay(r)}
-function autoSay(r){const id=PGS.id;if(id==='rim')say(PW[r.a]);else if(id==='atk')say(PW[r.k]);else if(id==='sam')say([...PW[r.k]].join(', '));else if(id==='hvar')say(PW[r.k])}
+function autoSay(r){const id=PGS.id;if(id==='rim')say(r.a);else if(id==='atk')say(PW[r.k]);else if(id==='sam')say([...PW[r.k]].join(', '));else if(id==='hvar')say(PW[r.k])}
 function renderPG(){const s=PGS,b=$('pgBody');if(!s)return;
   const dots=`<div class="wgdots">${s.r.map((r,i)=>`<i class="${i<s.i?(r.first?'ok':'no'):i===s.i?'cur':''}"></i>`).join('')}</div>`;
   if(s.i>=s.r.length){const n=s.r.length,st=s.score>=n?3:s.score>=Math.ceil(n*.6)?2:s.score>0?1:0,today=dkey(new Date());PR.pgDay=PR.pgDay||{};const first=PR.pgDay[s.id]!==today;
@@ -6809,7 +6826,7 @@ function renderPG(){const s=PGS,b=$('pgBody');if(!s)return;
     b.innerHTML=`<div class="wgcard wgend"><div class="wgstars">${[0,1,2].map(i=>`<span class="${i<st?'on':''}">${STARSVG}</span>`).join('')}</div><h3>${st===3?'Frábært!':st===2?'Vel gert!':st===1?'Góð byrjun!':'Æfingin skapar meistarann!'}</h3><p>Þú gerðir ${s.score} af ${n} rétt í fyrstu tilraun.</p><p class="pmuted">${first&&st>0?`Þú fékkst ${st===1?'eina stjörnu':st+' stjörnur'}.`:st>0?'Stjörnur fást fyrir fyrsta skiptið í dag, en þú mátt spila eins oft og þú vilt.':''}</p><div class="actions"><button class="btn primary" type="button" data-pg="again">Spila aftur</button><button class="btn ghost" type="button" data-pg="home">Fleiri leikir</button></div></div>`;return}
   const r=s.r[s.i];let body='';
   const opt=(v,inner,cls='')=>`<button type="button" class="pgopt ${cls}${r.pick===v?(r.ok?' right':' wrong'):''}${(r.wrongs||[]).includes(v)?' wrong':''}" data-pv="${esc(String(v))}" ${r.ok?'disabled':''}>${inner}</button>`;
-  if(s.id==='rim')body=`<p class="wgq">Hvað rímar við</p><div class="pgbig">${pic(r.a)}<b>${esc(PW[r.a])}</b>${spk(PW[r.a])}</div><div class="pgopts">${r.opts.map(k=>opt(k,`${pic(k)}<span>${esc(PW[k])}</span>`)).join('')}</div>`;
+  if(s.id==='rim')body=`<p class="wgq">Hvað rímar við</p><div class="pgbig">${PICOF[r.a]?pic(PICOF[r.a]):''}<b>${esc(r.a)}</b>${spk(r.a)}</div><div class="pgopts${r.pm?'':' pgrimt'}">${r.opts.map(w=>opt(w,r.pm?`${pic(PICOF[w])}<span>${esc(w)}</span>`:`<span class="pgrw${w.length>7?' pglong':''}">${pieces(w).map(esc).join('&shy;')}</span>${canSay()?`<span class="pgosay" role="button" data-pgsay="${esc(w)}" aria-label="Hlusta á ${esc(w)}">${WSPK}</span>`:''}`)).join('')}</div>`;
   else if(s.id==='atk')body=`<p class="wgq">Klappaðu einu sinni fyrir hvert atkvæði</p><div class="pgbig">${pic(r.k)}<b>${esc(r.ok?pieces(PW[r.k]).join('·'):PW[r.k])}</b>${spk(PW[r.k])}</div><div class="pgbeads">${Array.from({length:Math.max(r.c,1)},(_,i)=>`<i class="${i<r.c?'on':''}"></i>`).join('')}</div><div class="actions"><button type="button" class="pgdrum" data-pg="clap" ${r.ok?'disabled':''} aria-label="Klapp"><svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="22" rx="24" ry="9" fill="#FFE27A" stroke="#3A2A20" stroke-width="3"/><path d="M8 22 V44 Q32 56 56 44 V22" fill="#E8434A" stroke="#3A2A20" stroke-width="3"/><path d="M8 30 L20 50 M32 32 L32 53 M56 30 L44 50" stroke="#FFE27A" stroke-width="3"/></svg>Klapp</button></div><div class="actions"><button type="button" class="btn ghost small" data-pg="reset" ${!r.c||r.ok?'disabled':''}>Byrja aftur</button><button type="button" class="btn primary" data-pg="check" ${!r.c||r.ok?'disabled':''}>Athuga</button></div>`;
   else if(s.id==='sam')body=`<p class="wgq">Settu hljóðin saman. Hvaða orð er þetta?</p><div class="pgsounds">${[...PW[r.k]].map(c=>`<span>${esc(c)}</span>`).join('<i>·</i>')}${spk([...PW[r.k]].join(', '))}</div><div class="pgopts">${r.opts.map(k=>opt(k,`${pic(k)}<span>${r.ok?esc(PW[k]):''}</span>`)).join('')}</div>`;
   else if(s.id==='hvar')body=`<p class="wgq">Hvar heyrist <b class="pgch">${esc(r.ch)}</b> í orðinu?</p><div class="pgbig">${pic(r.k)}<b>${[...PW[r.k]].map(c=>`<span class="${r.ok&&c===r.ch?'pghl':''}">${esc(c)}</span>`).join('')}</b>${spk(PW[r.k])}</div><div class="pgopts pgtext">${[['fremst','Fremst'],['miðju','Í miðju'],['aftast','Aftast']].map(([v,l])=>opt(v,`<span>${l}</span>`)).join('')}</div>`;
@@ -6999,7 +7016,7 @@ function statQuit(r){if(!r||r.ended||r.quitSent||!r.path||!r.path.length)return;
    Ef villa kemur upp í appinu er send stutt tilkynning í errors/: villuboðin, skrá og lína, útgáfa appsins,
    tegund vafra (t.d. Safari), gerð tækis (sími/spjald/tölva), dagsetning og skjámynd. Ekkert um notandann.
    Mest 5 tilkynningar í hverri heimsókn og hver villa aðeins einu sinni. */
-const APPV='51';
+const APPV='54';
 const ERRSEEN=new Set();
 function errBrowser(){const u=navigator.userAgent||'';return /Edg\//.test(u)?'Edge':/SamsungBrowser/.test(u)?'Samsung':/Firefox\//.test(u)?'Firefox':/CriOS|Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'Annað'}
 function errSend(msg,src){try{if(!FB_CONFIG||window.__LS_NOSTAT||navigator.onLine===false)return;msg=String(msg||'').slice(0,300);src=String(src||'').replace(/^https?:\/\/[^/]+\//,'').slice(0,160);
