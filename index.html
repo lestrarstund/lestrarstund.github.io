@@ -7514,7 +7514,7 @@ const HB=[
 <p>Lestrarstund er vefapp. Þegar það er komið á heimaskjáinn opnast það eins og venjulegt app og virkar líka án nettengingar.</p>
 <ul><li><b>iPad og iPhone:</b> Opnaðu slóðina í Safari, ýttu á Deila-táknið og veldu „Bæta á heimaskjá“.</li><li><b>Android:</b> Opnaðu slóðina í Chrome, ýttu á ⋮ og veldu „Setja upp forrit“ eða „Bæta á heimaskjá“.</li></ul>
 <h3>Aðgangur</h3>
-<p>Með aðgangi geymist lesturinn í skýinu og samstillist á milli tækja. Þú getur líka prófað appið án aðgangs. Þá er ein saga opin í hverjum flokki og hinar eru læstar, gögnin eru aðeins á þessu tæki og hægt er að stofna aðgang seinna undir Stillingar → Aðgangur. Þá opnast allar sögurnar og það sem búið er að lesa fylgir með.</p>
+<p>Með aðgangi geymist lesturinn í skýinu og samstillist á milli tækja. Þú getur líka prófað appið án aðgangs. Þá eru þrjár sögur opnar í hverjum flokki og hinar eru læstar, gögnin eru aðeins á þessu tæki og hægt er að stofna aðgang seinna undir Stillingar → Aðgangur. Þá opnast allar sögurnar og það sem búið er að lesa fylgir með.</p>
 <h3>Börnin</h3>
 <p>Hægt er að hafa allt að fimm lesendur. Fyrir hvert barn velur þú nafn, aldur, þyngdarstig og mynd. Styttri sögurnar henta 7–8 ára og lengri sögurnar 9–10 ára. Nafnið birtist í sögunum þar sem barnið er sjálft hetjan.</p>
 <h3>Lykilorð foreldra</h3>
@@ -7600,7 +7600,7 @@ const HB=[
 <p>Engar auglýsingar eru í appinu og engin rakning. Börnin skrá sig aldrei inn og geta ekki haft samskipti við aðra. Upptökur af lestri eru eingöngu geymdar á tækinu og fara aldrei í skýið.</p>`,go:[['Opna aðgang','acct'],['Opna afrit','backup']]},
 ];
 const FAQ=[
- ['Af hverju eru sumar sögur læstar?','Án aðgangs er ein saga opin í hverjum flokki svo hægt sé að prófa appið. Þegar þú stofnar aðgang undir Stillingar → Aðgangur opnast allar sögurnar og það sem börnin hafa þegar lesið fylgir með.'],
+ ['Af hverju eru sumar sögur læstar?','Án aðgangs eru þrjár sögur opnar í hverjum flokki svo hægt sé að prófa appið. Þegar þú stofnar aðgang undir Stillingar → Aðgangur opnast allar sögurnar og það sem börnin hafa þegar lesið fylgir með.'],
  ['Ég gleymdi lykilorði foreldra. Hvað geri ég?','Ýttu á „Gleymt lykilorð?“ á lykilorðsskjánum. Þú skráir þig inn með netfanginu þínu og velur nýtt lykilorð. Ef appið er notað án aðgangs þarf að sækja afrit eða byrja upp á nýtt.'],
  ['Getum við bæði foreldrin notað appið?','Já. Farðu í Stillingar → Aðgangur og búðu til boðskóða. Hitt foreldrið stofnar aðgang í sínu tæki og slær inn kóðann. Kóðinn gildir í sjö daga.'],
  ['Hvernig set ég appið á heimaskjáinn?','Á iPad og iPhone opnar þú slóðina í Safari, ýtir á Deila-táknið og velur „Bæta á heimaskjá“. Á Android opnar þú slóðina í Chrome, ýtir á ⋮ og velur „Setja upp forrit“.'],
@@ -7813,12 +7813,12 @@ function markDlg(id){const st=STORIES[id],on=!!(PR.marked||{})[id];let d=$('mark
     if(a==='off'){delete PR.marked[id];save();renderHome()}};
   setTimeout(()=>{const b=d.querySelector('[data-md]');if(b)b.focus()},50)}
 
-/* ---------- Prufuútgáfa án aðgangs: ein saga opin í hverjum flokki ---------- */
-const LOCKG=['p','a','b','c'];let FREEC=null;
+/* ---------- Prufuútgáfa án aðgangs: FREE_PER sögur opnar í hverjum flokki ---------- */
+const LOCKG=['p','a','b','c'],FREE_PER=3;let FREEC=null;
 const LOCKSVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Zm3 4a2 2 0 0 1 1 3.7V19h-2v-1.3A2 2 0 0 1 12 14Z"/></svg>';
 function trialOn(){return !window.__LS_ALL&&AC.mode!=='cloud'}
 function freeSet(){const n=Object.keys(STORIES).length;if(FREEC&&FREEC.n===n)return FREEC.s;const s=new Set(),seen={};
-  for(const st of Object.values(STORIES)){if(!LOCKG.includes(st.group))continue;const k=st.age+st.group;if(!seen[k]){seen[k]=1;s.add(st.id)}}
+  for(const st of Object.values(STORIES)){if(!LOCKG.includes(st.group))continue;const k=st.age+st.group;if((seen[k]||0)<FREE_PER){seen[k]=(seen[k]||0)+1;s.add(st.id)}}
   FREEC={n,s};return s}
 function isLocked(id){const st=STORIES[id];if(!st||!trialOn()||!LOCKG.includes(st.group))return false;return !freeSet().has(id)}
 function trialCount(age){const L=Object.values(STORIES).filter(s=>s.age===age&&LOCKG.includes(s.group));return {free:L.filter(s=>!isLocked(s.id)).length,all:L.length}}
@@ -7834,7 +7834,7 @@ function trialBar(){const b=$('trialBar');if(!b)return;const on=trialOn()&&!!PR;
 document.addEventListener('click',e=>{if(e.target.closest('[data-trial]'))lockDlg(null)});
 let LOCKNEXT=null;
 function lockDlg(id){const st=id?STORIES[id]:null,busy=T.active&&!T.done;let d=$('lockDlg');if(!d){d=document.createElement('div');d.id='lockDlg';d.className='mdlg';document.body.appendChild(d)}
-  d.innerHTML=`<div class="mbox lkbox" role="dialog" aria-modal="true" aria-labelledby="lkT"><span class="lkic">${LOCKSVG}</span><h3 id="lkT">${st?'Þessi saga þarf aðgang':'Opnaðu allar sögurnar'}</h3>${st?`<p class="lkst">„${esc(st.title)}“</p>`:''}<p>Án aðgangs er ein saga opin í hverjum flokki. Með aðgangi opnast allar sögurnar og lesturinn geymist örugglega á milli tækja.</p><p>${busy?'Biddu mömmu eða pabba að stofna aðgang í Stillingum þegar lestrinum er lokið.':'Biddu mömmu eða pabba að stofna aðgang. Það tekur bara smá stund.'}</p><div class="actions">${busy?'':'<button type="button" class="btn primary" data-lk="go">Stofna aðgang</button>'}<button type="button" class="btn ghost" data-lk="x">${busy?'Allt í lagi':'Ekki núna'}</button></div></div>`;
+  d.innerHTML=`<div class="mbox lkbox" role="dialog" aria-modal="true" aria-labelledby="lkT"><span class="lkic">${LOCKSVG}</span><h3 id="lkT">${st?'Þessi saga þarf aðgang':'Opnaðu allar sögurnar'}</h3>${st?`<p class="lkst">„${esc(st.title)}“</p>`:''}<p>Án aðgangs eru þrjár sögur opnar í hverjum flokki. Með aðgangi opnast allar sögurnar og lesturinn geymist örugglega á milli tækja.</p><p>${busy?'Biddu mömmu eða pabba að stofna aðgang í Stillingum þegar lestrinum er lokið.':'Biddu mömmu eða pabba að stofna aðgang. Það tekur bara smá stund.'}</p><div class="actions">${busy?'':'<button type="button" class="btn primary" data-lk="go">Stofna aðgang</button>'}<button type="button" class="btn ghost" data-lk="x">${busy?'Allt í lagi':'Ekki núna'}</button></div></div>`;
   d.hidden=false;d.onclick=e=>{const b=e.target.closest('[data-lk]');if(!b&&e.target!==d)return;d.hidden=true;if(b&&b.dataset.lk==='go'){LOCKNEXT='acct';openLock()}};
   setTimeout(()=>{const b=d.querySelector('[data-lk]');if(b)b.focus()},50)}
 
@@ -8112,7 +8112,7 @@ function renderAcct(){const c=AC.mode==='cloud'&&!!AC.fid;
       <div class="acsync"><span class="acdot${SY.err?' warn':''}" id="acDot"></span><span id="acSync">${syncLabel()}</span></div>
       <div class="actions"><button class="btn ghost small" id="acSyncNow" type="button">Samstilla núna</button><button class="btn ghost small" id="acOut" type="button">Skrá út af þessu tæki</button></div>
       <div class="confirm" id="acOutConfirm" hidden><p>Gögnin eru geymd í aðganginum og verða fjarlægð af þessu tæki. Upptökur eru aðeins á tækinu og eyðast, svo vistaðu afrit fyrst ef þú vilt halda þeim.</p><div class="cbtns"><button type="button" class="yes" id="acOutYes">Skrá út</button><button type="button" class="no" id="acOutNo">Hætta við</button></div></div>`
-    :`<h3>Aðgangur</h3><p class="pmuted">Gögnin eru aðeins geymd á þessu tæki. Með aðgangi eru þau geymd örugglega og samstillt á milli tækja, til dæmis spjaldtölvu og síma, og bæði foreldri geta fylgst með.</p><p class="pmuted"><b>Án aðgangs er ein saga opin í hverjum flokki.</b> Þegar þú stofnar aðgang opnast allar sögurnar og það sem börnin hafa lesið fylgir með.</p>
+    :`<h3>Aðgangur</h3><p class="pmuted">Gögnin eru aðeins geymd á þessu tæki. Með aðgangi eru þau geymd örugglega og samstillt á milli tækja, til dæmis spjaldtölvu og síma, og bæði foreldri geta fylgst með.</p><p class="pmuted"><b>Án aðgangs eru þrjár sögur opnar í hverjum flokki.</b> Þegar þú stofnar aðgang opnast allar sögurnar og það sem börnin hafa lesið fylgir með.</p>
       <div class="actions"><button class="btn primary" id="acNew" type="button">Stofna aðgang</button><button class="btn ghost" id="acLogin" type="button">Skrá inn</button></div>`;
   $('acInv').hidden=!c;if(c&&!$('acCode').textContent){fb().then(api=>api.members(AC.fid)).then(m=>{$('acMem').textContent=m.length>1?`${m.length} foreldrar eru tengdir aðganginum.`:'Aðeins þú ert tengd(ur) aðganginum.'}).catch(()=>{})}
   $('acPinNote').textContent=S.pin?`Síðast breytt ${relTime(S.pin.t)}. Notað fyrir foreldrasvæðið og heimalestur.`:'Appið notar ennþá sjálfgefna lykilorðið. Veldu þitt eigið svo krakkarnir viti það ekki.';
