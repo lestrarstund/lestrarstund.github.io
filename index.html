@@ -721,6 +721,17 @@ body.onstart{background-image:radial-gradient(520px 420px at 0% 0%,rgba(150,195,
 .sjbig small{font-size:.95rem;color:var(--muted);font-weight:600;letter-spacing:0}
 .sjrw{margin:0;font-size:.92rem;color:var(--ink)}
 .sjar.full{box-shadow:0 0 0 3px var(--sun),var(--shadow)}
+/* Stjörnuhrúgan: stór krukka vinstra megin, texti hægra megin */
+.sjpile{display:flex;align-items:center;gap:16px}
+.sjpic{flex:none;width:104px}.sjpic svg{display:block;width:104px;height:auto}
+.sjtx{min-width:0}.sjtx>b{display:block;font-size:1.1rem}.sjtx>span{font-size:.85rem;color:var(--muted)}
+.sjtx .sjbig{margin-top:10px}.sjtx .sjrw{margin-top:8px}
+.jglass{fill:#E4F2FC}
+:root[data-theme="dark"] .jglass{fill:#2A2F3A}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .jglass{fill:#2A2F3A}}
+.jdrop{animation:jdrop .7s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes jdrop{from{transform:translateY(-150px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion: reduce){.jdrop{animation:none}}
 
 /* heimalestur */
 #homeread .pcard h3{font-size:1.15rem}
@@ -6654,7 +6665,7 @@ function startMapHTML(ids){
   else{const best=P.reduce((a,b)=>(b.trip||0)>(a.trip||0)?b:a),same=P.every(p=>(p.trip||0)===(best.trip||0));lead=`${P.length} lesendur á ferð um landið. `+(same?((best.trip||0)===0?'Allir byrja í Reykjavík.':'Allir eru á sama stað.'):`${esc(best.name)} hefur farið lengst.`)}
   return `<div class="mtx"><span class="kind">Ferðalagið um Ísland</span><b>Hvert förum við í dag?</b><p>${lead}</p><p class="msub">Hver lestrardagur færir ykkur á næsta stað.</p></div><div class="mmap"><svg viewBox="0 0 400 290" aria-hidden="true"><path d="${coast}" fill="#C3E7AE" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>${gl}<path d="${road}" fill="none" stroke="#0A60D6" stroke-width="1.6" stroke-dasharray="4 3.5" opacity=".6"/>${dots}</svg>${pins}</div>`}
 function startJarHTML(ids){if(jarMode()==='each')return startJarsHTML(ids||visIds());const j=S.jar,g=Math.max(1,j.goal),full=j.n>=g,rw=j.reward?esc(j.reward):'umbun sem mamma eða pabbi velja';
-  return `<div class="sjrow"><span class="sjic">${jarSVG(j.n,j.goal)}</span><div><b>Stjörnukrukkan</b><span>Allir safna saman</span></div></div><div class="sjbig">${nf(Math.min(j.n,g))} <small>af ${nf(g)} stjörnum</small></div><div class="jarbar" role="img" aria-label="${Math.round(Math.min(1,j.n/g)*100)} prósent full"><i style="width:${Math.min(100,j.n/g*100)}%"></i></div><p class="sjrw">${full?`Krukkan er full! Umbunin er: <b>${rw}</b>`:`Umbun: <b>${rw}</b>`}</p>`}
+  return `<div class="sjpile"><span class="sjpic" role="img" aria-label="${nf(Math.min(j.n,g))} af ${nf(g)} stjörnum í krukkunni">${jarSVG(j.n,j.goal,jarDrop('shared',j.n))}</span><div class="sjtx"><b>Stjörnukrukkan</b><span>Allir safna saman</span><div class="sjbig">${nf(Math.min(j.n,g))} <small>/ ${nf(g)}</small></div><p class="sjrw">${full?`Krukkan er full! Umbunin er: <b>${rw}</b>`:`Umbun: <b>${rw}</b>`}</p></div></div>`}
 function choose(id){PR=S.profiles[id];CAT='all';document.body.classList.toggle('age9',PR.age===9);selMin=Math.max(1,Math.min(60,+PR.settings.min||15));renderHome();show('home')}
 const LP={t:0,raf:0,b:null,fired:false,t0:0};
 function lpStop(){clearTimeout(LP.t);cancelAnimationFrame(LP.raf);if(LP.b){LP.b.classList.remove('holding');const h=LP.b.querySelector('.whold');if(h)h.setAttribute('stroke-dasharray',`0 ${f1(2*Math.PI*45)}`)}LP.b=null}
@@ -7058,11 +7069,15 @@ function rJarSet(){const el=$('rJar');if(!el)return;el.hidden=!jarOn();if(!jarOn
 function addStars(p,n){p.stars=Math.max(0,p.stars+n);if(n>0&&jarOn())jarOf(p).n+=n;save()}
 
 /* ---------- Stjörnukrukkan ---------- */
-function jarSVG(n,goal){
-  const cap=Math.max(1,goal),fill=Math.min(1,n/cap),cols=6,rows=8,slots=cols*rows,shown=Math.round(fill*slots);
-  let st='';for(let i=0;i<shown;i++){const r=Math.floor(i/cols),c=i%cols;const x=34+c*13+(r%2?6:0),y=150-r*13;st+=`<path d="${starPath(6.4,2.9)}" transform="translate(${x} ${y}) rotate(${(i*37)%40-20})" fill="url(#gStar)" stroke="#C98A00" stroke-width=".8"/>`}
-  const full=n>=cap;
-  return `<svg viewBox="0 0 140 180" aria-hidden="true">${full?'<circle cx="70" cy="100" r="78" fill="url(#gGlow)"/>':''}<rect x="40" y="10" width="60" height="16" rx="5" fill="#C98E5A" stroke="#7A4A26" stroke-width="2"/><path d="M34 30 H106 Q118 30 118 44 V160 Q118 172 104 172 H36 Q22 172 22 160 V44 Q22 30 34 30Z" fill="#DDF3FF" fill-opacity=".35" stroke="#7FA6C9" stroke-width="3"/>${st}<path d="M30 48 Q28 100 32 150" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6" fill="none"/></svg>`}
+/* Stjörnuhrúgan: hver stjarna á sinn stað í krukkunni (7 í röð, 11 raðir); full krukka = fullur bunki.
+   drop = fjöldi nýjustu stjarna sem detta ofan í krukkuna. */
+const JSLOTS=Array.from({length:77},(_,i)=>{const r=Math.floor(i/7),c=i%7;return [f1(33+c*12.2+(r%2?5:0)+((r*7+c)*37%5-2)*.6),f1(162-r*12+((r+c)*13%3-1)),((r*3+c*7)*29%40)-20]});
+function jarSVG(n,goal,drop=0){
+  const cap=Math.max(1,goal),fill=Math.min(1,n/cap),shown=Math.round(fill*JSLOTS.length),full=n>=cap,d=Math.min(drop,shown,6);
+  const st=JSLOTS.slice(0,shown).map(([x,y,r],i)=>{const s=`<path d="${starPath(7,3.1)}" transform="translate(${x} ${y}) rotate(${r})" fill="url(#gStar)" stroke="#C98A00" stroke-width=".8"/>`;return i>=shown-d?`<g class="jdrop" style="animation-delay:${(i-(shown-d))*.18}s">${s}</g>`:s}).join('');
+  return `<svg viewBox="0 0 140 180" aria-hidden="true">${full?'<circle cx="70" cy="100" r="78" fill="url(#gGlow)"/>':''}<path class="jglass" d="M34 30 H106 Q118 30 118 44 V160 Q118 172 104 172 H36 Q22 172 22 160 V44 Q22 30 34 30Z"/>${st}<rect x="38" y="8" width="64" height="18" rx="6" fill="#C98E5A" stroke="#7A4A26" stroke-width="2"/><rect x="39" y="20" width="62" height="5" fill="#A8703F"/><path d="M34 30 H106 Q118 30 118 44 V160 Q118 172 104 172 H36 Q22 172 22 160 V44 Q22 30 34 30Z" fill="none" stroke="#8FB4D6" stroke-width="3.5"/><path d="M31 50 Q29 100 33 150" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5" fill="none"/></svg>`}
+/* Hve margar stjörnur voru í krukkunni síðast þegar hún sást, svo nýjar stjörnur detti ofan í hana */
+function jarDrop(key,n){let k='lestrarstund.jarSeen.'+key,prev=null;try{prev=localStorage.getItem(k);localStorage.setItem(k,String(n))}catch(e){}return prev===null?0:Math.max(0,n-(+prev||0))}
 let JK=null;
 function jarCur(){if(jarMode()!=='each')return S.jar;const ids=visIds();if(!JK||!ids.includes(JK))JK=ids[0];return jarOf(S.profiles[JK])}
 function renderJarPane(){const m=jarMode();
