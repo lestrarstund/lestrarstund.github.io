@@ -24,13 +24,17 @@ Aðeins foreldrar og forráðamenn, 18 ára og eldri, geta stofnað aðgang. For
 **Um hvert barn (lesanda)**
 
 - Fornafn eða gælunafn. Við mælum með að nota aðeins fornafn eða gælunafn.
-- Aldur eða aldursbil, erfiðleikastig og valin persóna (mynd).
+- Aldur eða aldursbil, erfiðleikastig og valin persóna. Persónan er annaðhvort teiknuð persóna úr appinu eða eigin karakter sem barnið setur saman úr teiknuðum hlutum (til dæmis hárgreiðslu, litum og fötum). Hvorugt er mynd af barninu.
 - Lestrarsaga: hvaða sögur eru lesnar, mínútur, stjörnur, svör við spurningum í lok sagna og áætlaður leshraði.
 - Heimalestur sem foreldri skráir: dagsetning, mínútur og bókarheiti ef það er skráð.
 
 **Radd- og hljóðupptökur**
 
 Ef barnið les upphátt og tekur sig upp eru upptökurnar eingöngu vistaðar á tækinu sjálfu. Þær eru aldrei sendar til okkar eða í skýið.
+
+**Prófílmynd á tækinu**
+
+Foreldri getur valið mynd úr myndasafni tækisins sem prófílmynd fyrir barn, í foreldrasvæðinu sem er læst með PIN-númeri. Myndin er minnkuð og vistuð eingöngu á tækinu sjálfu. Hún er aldrei send til okkar eða í skýið, samstillist ekki á milli tækja og er ekki hluti af öryggisafriti. Á öðrum tækjum birtist valin persóna í staðinn. Foreldri getur fjarlægt myndina hvenær sem er í foreldrasvæðinu.
 
 **Tæknilegar upplýsingar**
 
@@ -71,7 +75,7 @@ Firebase Authentication er eingöngu rekið í gagnaverum í Bandaríkjunum. Goo
 - Á meðan aðgangurinn er virkur.
 - Þegar foreldri eyðir lesanda eða aðgangi er gögnunum eytt strax úr gagnagrunninum. Afrit hjá Google eyðast innan [30] daga.
 - Ef aðgangur hefur ekki verið notaður í [24] mánuði sendum við tölvupóst og eyðum honum [30] dögum síðar ef ekkert svar berst.
-- Gögn sem aðeins eru á tækinu (til dæmis upptökur) eyðast þegar appinu eða gögnum vafrans er eytt.
+- Gögn sem aðeins eru á tækinu (til dæmis upptökur og prófílmyndir) eyðast þegar appinu eða gögnum vafrans er eytt. Prófílmynd eyðist líka þegar lesanda er eytt.
 
 ### 9. Réttindi þín
 

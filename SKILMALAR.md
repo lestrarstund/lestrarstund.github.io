@@ -20,6 +20,7 @@ Lestrarstund er íslenskt lestrarapp fyrir börn. Barnið les sögur, velur hver
 - Foreldri ákveður hvaða upplýsingar um barnið eru skráðar og ber ábyrgð á notkun barnsins á appinu.
 - Við mælum með að nota aðeins fornafn eða gælunafn barnsins.
 - PIN-númerið kemur í veg fyrir að barnið breyti stillingum en kemur ekki í stað eftirlits foreldra.
+- Ef þú velur mynd úr myndasafni tækisins sem prófílmynd barns skaltu aðeins nota mynd sem þú hefur rétt til að nota. Myndin er aðeins geymd á tækinu, eins og lýst er í persónuverndarstefnunni.
 
 ### 4. Leyfileg notkun
 
@@ -31,7 +32,7 @@ Lestrarstund er íslenskt lestrarapp fyrir börn. Barnið les sögur, velur hver
 
 ### 5. Hugverkaréttindi
 
-Sögur, myndir, persónur, hönnun og hugbúnaður Lestrarstundar eru eign [NAFN ÁBYRGÐARAÐILA] eða þeirra sem veitt hafa leyfi til notkunar. Þú og barnið eigið áfram allt efni sem þið búið til sjálf, til dæmis upptökur.
+Sögur, myndir, persónur, hönnun og hugbúnaður Lestrarstundar eru eign [NAFN ÁBYRGÐARAÐILA] eða þeirra sem veitt hafa leyfi til notkunar. Þú og barnið eigið áfram allt efni sem þið búið til sjálf, til dæmis upptökur og myndir sem þið setjið inn.
 
 ### 6. Verð
 
