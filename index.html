@@ -245,11 +245,6 @@ body.is-paused .page{opacity:.45}
 .parentlink{display:flex;justify-content:center;margin-top:18px}
 .parentlink .linkbtn{display:inline-flex;align-items:center;gap:8px}
 .parentlink svg{width:18px;height:18px}
-.readtimes{display:inline-flex;align-items:center;gap:6px;font-size:1rem}
-.rdot{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--accent);background:transparent;cursor:pointer;padding:0;display:grid;place-items:center;color:var(--on-accent)}
-.rdot svg{width:16px;height:16px;opacity:0}
-.rdot[aria-pressed="true"]{background:var(--accent)}
-.rdot[aria-pressed="true"] svg{opacity:1}
 /* Foreldrar */
 .lockcard{max-width:360px;margin:20px auto 0;background:var(--surface);border-radius:28px;padding:24px 20px;box-shadow:var(--shadow);display:grid;gap:12px;justify-items:center;text-align:center}
 .lockcard h2{margin:0;font-size:1.8rem}
@@ -1400,6 +1395,134 @@ button.wps{cursor:pointer}
 .lkst{font-weight:700;color:var(--ink)!important;margin-top:-4px!important}
 :root[data-theme="dark"] .lkic{background:#14284A;color:#6AA6FF}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lkic{background:#14284A;color:#6AA6FF}}
+
+/* ===== Útlit lesskjásins (A–D). Upprunalegt (O) notar reglurnar hér fyrir ofan óbreyttar ===== */
+.rprog,.rbuddy,.rlaa{display:none}
+.rtime{font-weight:700;font-size:.95rem;color:var(--muted);background:var(--surface);border-radius:999px;padding:6px 12px;box-shadow:var(--shadow)}
+.rtime[hidden]{display:none}
+body.session.inread:is(.rl-A,.rl-B,.rl-C,.rl-D):has(#pauseWrap)::before{display:none}
+
+/* A: Opin bók */
+body.inread.rl-A{background:radial-gradient(120% 80% at 50% 0%,#8A5A3B,#4E321F) fixed #5B3A26}
+body.rl-A #read .readhead{color:#F7E9D4}
+body.rl-A #read .readhead .rs{color:#FBF4E6;font-family:Georgia,'Times New Roman',serif;font-weight:700;letter-spacing:0;font-size:1.45rem}
+body.rl-A #rPage,body.rl-A .rtime{background:rgba(255,248,236,.92);color:#5B3A26;box-shadow:none}
+body.rl-A #read .page{background:#FBF4E6;color:#2B1E14;border-radius:14px;padding:clamp(18px,3.2vw,40px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+body.rl-A #read .storytext{color:#2B1E14}
+body.rl-A #read .illus{border:8px solid #fff;border-radius:10px;box-shadow:0 4px 14px rgba(91,58,38,.25);transform:rotate(-1deg);background:#fff}
+body.rl-A #read .storytext::first-letter{float:left;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:3.2em;line-height:.8;color:#C0602A;margin:.08em .1em 0 0}
+body.rl-A .readtools{background:#F1E6D2;box-shadow:none}
+body.rl-A .readtools .tool{color:#5B3A26}
+body.rl-A .choice{background:#fff!important;border:2px solid #EADBC2;box-shadow:none!important;color:#5B3A26!important}
+body.rl-A .choice:hover{box-shadow:0 4px 10px rgba(91,58,38,.15)!important}
+body.rl-A .choice .ch-ic{background:#C0602A;color:#fff}
+body.rl-A .choice.c1 .ch-ic{background:#3F7F5B}
+body.rl-A .choice.c2 .ch-ic{background:#2F6FB0}
+body.rl-A .endbox,body.rl-A .task,body.rl-A .wordtip{color:#2B1E14}
+body.rl-A .endbox{background:#fff}
+body.rl-A #read .readfoot .linkbtn{color:#F7E9D4}
+@media (min-width:900px){
+  body.rl-A #read .page{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;column-gap:72px!important;background:linear-gradient(90deg,#FBF4E6 0,#FBF4E6 45%,#E9DCC3 49.4%,#CDB894 50%,#E9DCC3 50.6%,#FBF4E6 55%,#FBF4E6 100%)}
+  body.rl-A #read .page>.illus{top:110px}
+}
+
+/* B: Myndin í aðalhlutverki */
+body.inread.rl-B{background:var(--surface)}
+body.inread.rl-B .app{max-width:none;padding:0}
+body.rl-B #read{position:relative;--bh:75vw}
+body.rl-B #read .rprog{display:flex;gap:5px;order:0;flex-basis:100%;margin-bottom:4px}
+body.rl-B #read .rprog i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.5);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+body.rl-B #read .rprog i.on{background:#fff}
+body.rl-B #read .readhead{position:absolute;z-index:3;left:20px;right:20px;top:calc(var(--bh) - 104px);color:#fff;margin:0;align-items:flex-end}
+body.rl-B #read .readhead .rs{color:#fff;font-size:1.7rem;text-shadow:0 2px 10px rgba(0,0,0,.4);flex-basis:100%;order:3}
+body.rl-B #rPage{order:1;background:none;box-shadow:none;color:#fff;padding:0;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+body.rl-B .rtime{order:2}
+body.rl-B #read .page{padding:0 20px 20px;max-width:none}
+body.rl-B #read .page>*{width:100%;max-width:800px;margin-inline:auto}
+body.rl-B #read .page>.illus{max-width:none;width:auto;margin:0 -20px;height:var(--bh);border-radius:0 0 34px 34px;aspect-ratio:auto;box-shadow:none;position:relative;background:var(--rlt,#DDEFE4)}
+body.rl-B #read .page>.illus>svg{height:100%}
+body.rl-B #read .page>.illus::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 60%,rgba(0,0,0,.5))}
+body.rl-B .readtools{background:var(--surface-2);box-shadow:none;width:fit-content!important;justify-self:start;margin-left:max(0px,calc((100% - 800px) / 2))!important;margin-right:auto!important}
+body.rl-B .choices{gap:12px}
+body.rl-B .choice{color:#fff!important;border-radius:20px;min-height:72px;font-weight:800;padding:16px 22px!important;box-shadow:0 5px 0 rgba(0,0,0,.16)!important;background:linear-gradient(160deg,#34C759,#1F9D4A)!important}
+body.rl-B .choice.c1{background:linear-gradient(160deg,#A06BF2,#7444D6)!important}
+body.rl-B .choice.c2{background:linear-gradient(160deg,#3D8BFD,#1E5FD0)!important}
+body.rl-B .choice .ch-ic{display:none}
+body.rl-B .choice::after{border-color:#fff;opacity:.9}
+@media (min-width:900px){
+  body.rl-B #read{--bh:min(58vh,46vw)}
+  body.rl-B #read .readhead{left:max(30px,calc(50vw - 400px));right:auto;width:min(800px,calc(100vw - 60px))}
+  body.rl-B #read .readhead .rs{font-size:2.3rem}
+  body.rl-B #read .page{display:grid;grid-template-columns:minmax(0,1fr)!important;row-gap:18px}
+  body.rl-B #read .page>*{grid-column:1!important}
+  body.rl-B #read .page>.illus{position:relative!important;top:0!important;grid-row:auto!important}
+}
+
+/* C: Ævintýrastígur */
+body.inread.rl-C{background:linear-gradient(180deg,#BFE3FF 0%,#E4F4FF 45%,#FFF6E0 100%) fixed #E4F4FF}
+body.rl-C #read .readhead{color:#2B4A6B}
+body.rl-C #read .readhead .rs{color:#1C3A5C}
+body.rl-C #rPage{display:none}
+body.rl-C #read .rprog{display:block;flex-basis:100%;order:-1;padding-right:min(240px,40vw)}
+body.rl-C .rpath{display:flex;align-items:center;gap:clamp(6px,1.6vw,18px);position:relative;flex-wrap:nowrap;max-width:620px}
+body.rl-C .rpath::before{content:"";position:absolute;left:18px;right:18px;top:50%;border-top:5px dotted #fff}
+body.rl-C .rst{position:relative;flex:0 1 34px;min-width:18px;width:34px;height:auto;aspect-ratio:1;border-radius:50%;background:#fff;border:3px solid #F2C14E;box-shadow:0 3px 0 #E3A92C;display:grid;place-items:center;font-weight:800;font-size:.9rem;color:#B07A10}
+body.rl-C .rst.done{background:#FFD24D;color:#7A5200}
+body.rl-C .rst.end{border-color:#34C759;box-shadow:0 3px 0 #22A447}
+body.rl-C .rst.now{flex:none;width:54px;height:54px;border:3px solid #fff;box-shadow:0 0 0 4px #FF9500,0 6px 12px rgba(0,0,0,.18);overflow:hidden;background:#8CC8F5}
+body.rl-C .rst.now svg{width:100%;height:100%;display:block}
+body.rl-C #read .illus{background:#fff;padding:10px;border-radius:10px;transform:rotate(-1.6deg);box-shadow:0 10px 24px rgba(0,0,0,.14);overflow:visible;position:relative}
+body.rl-C #read .illus>svg{border-radius:4px}
+body.rl-C #read .illus::before{content:"";position:absolute;z-index:2;width:110px;height:28px;background:rgba(255,196,84,.75);top:-12px;left:calc(50% - 55px);transform:rotate(3deg)}
+body.rl-C #read .textwrap{background:#fff;border-radius:20px;padding:14px 20px 14px 40px;box-shadow:0 8px 20px rgba(0,0,0,.07);position:relative}
+body.rl-C #read .textwrap::before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:#FFB3B3}
+body.rl-C #read .storytext{color:#1C1C1E;background-image:repeating-linear-gradient(transparent 0,transparent calc(1lh - 2px),#DCEBFA calc(1lh - 2px),#DCEBFA 1lh)}
+body.rl-C .readtools{background:none;box-shadow:none;gap:8px}
+body.rl-C .readtools .tool{background:#fff;border-radius:16px;box-shadow:0 4px 0 #D6DEE8;font-weight:800;color:#1C3A5C}
+body.rl-C .rbuddy{display:flex;align-items:flex-end;gap:10px;margin:0}
+body.rl-C .rbuddy[hidden],body.rl-C #read .page:has(#choices[hidden]) .rbuddy{display:none}
+body.rl-C .rbuddy .avc{width:48px;height:48px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15);flex:none;background:#8CC8F5}
+body.rl-C .rbuddy .avc svg{width:100%;height:100%;display:block}
+body.rl-C .rbuddy .bub{background:#fff;color:#1C1C1E;border-radius:18px 18px 18px 4px;padding:10px 16px;font-weight:800;font-size:1.05rem;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+body.rl-C .choice{background:linear-gradient(180deg,#D99A5B,#B9733A)!important;color:#fff!important;border-radius:6px;box-shadow:none!important;clip-path:polygon(0 0,calc(100% - 26px) 0,100% 50%,calc(100% - 26px) 100%,0 100%);padding:16px 44px 16px 22px!important;font-weight:800;text-shadow:0 2px 0 rgba(0,0,0,.2);filter:drop-shadow(0 4px 0 #8C5226)}
+body.rl-C .choice.c1{background:linear-gradient(180deg,#C98A4E,#A7652F)!important}
+body.rl-C .choice .ch-ic,body.rl-C .choice::after{display:none}
+body.rl-C .choice:hover{transform:translateX(4px)}
+body.rl-C .endbox,body.rl-C .task,body.rl-C .wordtip{color:#1C1C1E}
+
+/* A, C og D eru alltaf ljós; reitir inni í þeim fá ljósa liti líka í dökkum ham */
+body:is(.rl-A,.rl-C,.rl-D) #read :is(.wordtip,.endbox){background:#fff;color:#1C1C1E}
+body:is(.rl-A,.rl-C,.rl-D) #read .task{background:#EAF3FF;color:#1C1C1E}
+body:is(.rl-A,.rl-C,.rl-D) #read .task.ok{background:#E3F6E8}
+body:is(.rl-A,.rl-C,.rl-D) #read .recbtn{background:#fff;color:#1C1C1E}
+body:is(.rl-A,.rl-C,.rl-D) #read .writebox{background:#F5F1EA;color:#1C1C1E}
+body:is(.rl-A,.rl-C,.rl-D) #read .writebox textarea{background:#fff;color:#1C1C1E}
+body:is(.rl-A,.rl-C,.rl-D) #read :is(.prednote,.buddynote,#taskFeed,.retell,.etitle,.pmuted){color:#2B2B2E}
+body:is(.rl-A,.rl-C,.rl-D) #read .endbox .btn.ghost{background:#F2F2F7;color:#1C1C1E}
+body.rl-D .readtools .tool{color:#2E5A41}
+
+/* D: Rólegt og einbeitt */
+body.inread.rl-D{--rlbg:color-mix(in srgb,var(--rlt,#CFEBD9) 30%,#F6FAF7);background:radial-gradient(90% 70% at 15% 5%,color-mix(in srgb,var(--rlt,#CFEBD9) 55%,#fff),transparent 60%),radial-gradient(80% 70% at 95% 95%,#FFF0C9,transparent 60%) fixed var(--rlbg)}
+body.rl-D #read .readhead{align-items:center}
+body.rl-D #read .readhead .rs{font-size:1.05rem;color:#2E5A41;font-weight:700;order:2}
+body.rl-D #rPage{display:none}
+body.rl-D #read .rprog{display:flex;align-items:center;gap:10px;font-weight:700;color:#2E5A41;order:1}
+body.rl-D .rtime{order:4;background:rgba(255,255,255,.7)}
+body.rl-D #read .illus{border-radius:34px;box-shadow:0 30px 60px -22px rgba(46,90,65,.55)}
+body.rl-D #read .storytext{color:#2D3A33;line-height:1.9}
+body.rl-D .readtools{background:rgba(255,255,255,.7);box-shadow:none}
+body.rl-D .rlaa{display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+body.rl-D .readtools .tool:not(.rlaa),body.rl-D .readtools #rulerNav{display:none}
+body.rl-D .page.aaopen .readtools .tool:not(.rlaa){display:inline-flex;align-items:center}
+body.rl-D .page.aaopen .readtools #rulerNav:not([hidden]){display:inline}
+body.rl-D .page.aaopen .readtools #listenBtn[hidden]{display:none}
+body.rl-D .rlaa[aria-expanded="true"]{background:#DDF0E4;color:#2E5A41}
+body.rl-D #read .textwrap{clip-path:inset(-4px -14px)}
+body.rl-D #read .ruler{background:rgba(255,226,92,.38);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--rlbg,#F6FAF7) 55%,transparent);border-radius:8px}
+body.rl-D .choice{background:rgba(255,255,255,.85)!important;border-radius:999px;color:#2E5A41!important;box-shadow:0 2px 12px rgba(46,90,65,.1)!important}
+body.rl-D .choice .ch-ic{order:2;margin-left:auto;background:#34A867;color:#fff}
+body.rl-D .choice::after{display:none}
+body.rl-D .endbox,body.rl-D .task,body.rl-D .wordtip{color:#1C1C1E}
 </style>
 </head>
 <body>
@@ -1622,11 +1745,11 @@ button.wps{cursor:pointer}
   </section>
 
   <section id="read" hidden>
-    <div class="readhead"><span class="rs" id="rStory"></span><span class="readtimes" id="readTimes" hidden></span><span id="rPage"></span></div>
+    <div class="readhead"><span class="rprog" id="rProg" aria-hidden="true"></span><span class="rs" id="rStory"></span><span class="rtime" id="rTime" hidden></span><span id="rPage"></span></div>
     <article class="page" id="page">
       <figure class="illus" id="illus"></figure>
       <p class="buddynote" id="buddyNote" hidden></p>
-      <div class="readtools"><button class="tool" id="fsDown" type="button" aria-label="Minna letur">A−</button><button class="tool" id="fsUp" type="button" aria-label="Stærra letur">A+</button><button class="tool" id="rulerBtn" type="button" aria-pressed="false">Lesstika</button><span id="rulerNav" hidden><button class="tool" id="rulerUp" type="button" aria-label="Lína upp">▲</button> <button class="tool" id="rulerDn" type="button" aria-label="Lína niður">▼</button></span><button class="tool listen" id="listenBtn" type="button" hidden></button></div>
+      <div class="readtools"><button class="tool rlaa" id="rlAa" type="button" aria-expanded="false" aria-label="Lestrartól">Aa</button><button class="tool" id="fsDown" type="button" aria-label="Minna letur">A−</button><button class="tool" id="fsUp" type="button" aria-label="Stærra letur">A+</button><button class="tool" id="rulerBtn" type="button" aria-pressed="false">Lesstika</button><span id="rulerNav" hidden><button class="tool" id="rulerUp" type="button" aria-label="Lína upp">▲</button> <button class="tool" id="rulerDn" type="button" aria-label="Lína niður">▼</button></span><button class="tool listen" id="listenBtn" type="button" hidden></button></div>
       <div class="textwrap" id="textWrap"><div class="ruler" id="ruler" hidden></div><p class="storytext" id="storyText" tabindex="-1"></p></div>
       <p class="prednote" id="predNote" hidden></p>
       <div class="recrow" id="recRow" hidden><button class="recbtn" id="recBtn" type="button" aria-pressed="false"></button><p class="recfeed" id="recFeed" aria-live="polite"></p></div>
@@ -1635,6 +1758,7 @@ button.wps{cursor:pointer}
         <span class="ti" id="taskIc"></span>
         <div><p id="taskPrompt"></p><p id="taskFeed" aria-live="polite"></p></div>
       </div>
+      <p class="rbuddy" id="rBuddy" hidden></p>
       <div class="choices" id="choices"></div>
       <div class="endbox" id="endBox" hidden>
         <div class="etag">Endir <span class="newend" id="newEnd" hidden>Nýr endir!</span></div>
@@ -1858,7 +1982,7 @@ button.wps{cursor:pointer}
         <div class="ngh">Sameiginlegt</div><div class="ngrp" id="pNavShared"></div>
         <div class="ngh">Gögn</div><div class="ngrp" id="pNavData"></div>
         <div class="ngh">Hjálp</div><div class="ngrp" id="pNavHelp"></div>
-        <p class="pver" id="pVer">Lestrarstund · útgáfa 55</p>
+        <p class="pver" id="pVer">Lestrarstund · útgáfa 56</p>
       </nav>
       <div class="pmain">
         <button class="pback pback2" id="pBack2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Stillingar</button>
@@ -1924,6 +2048,8 @@ button.wps{cursor:pointer}
           <div id="jumpSet"><h4>Stökk upp í sögur fyrir 9–10 ára</h4><div class="chips small" id="jumpChips" role="radiogroup" aria-label="Stökk upp"></div><p class="pmuted" id="jumpInfo"></p></div>
           <div id="worldSet"><h4>Ferðalagið um heiminn</h4><p class="pmuted" id="worldInfo"></p><div class="chips small" id="worldChips" role="radiogroup" aria-label="Ferðalagið um heiminn"></div><h4>Þarf að lesa á hverjum degi?</h4><p class="pmuted">Sjálfgefið færist barnið einn reit áfram fyrir hvern lestrardag, líka þótt dagur detti út á milli. Þið getið líka valið að barnið þurfi að lesa samfleytt. Þá fer það einn reit til baka, eða aftur heim til Íslands, ef dagur dettur út. Allir dagar vikunnar teljast með. Stimplarnir haldast alltaf.</p><div class="chips small" id="wmodeChips" role="radiogroup" aria-label="Lesa á hverjum degi"></div></div>
           <div id="libSet"><h4>Útlit bókasafnsins</h4><p class="pmuted">Hvernig sögurnar birtast á heimasíðu barnsins. Allt annað á síðunni helst eins: vikan, heimalesturinn og ferðalagið.</p><div class="chips small" id="libChips" role="radiogroup" aria-label="Útlit bókasafnsins"></div></div>
+          <div id="rlSet"><h4>Útlit lesskjásins</h4><p class="pmuted">Hvernig sögurnar birtast á meðan barnið les. Textinn, myndirnar og lestrartólin eru þau sömu í öllum útlitunum.</p><div class="chips small" id="rlChips" role="radiogroup" aria-label="Útlit lesskjásins"></div><p class="pmuted" id="rlInfo"></p></div>
+          <h4>Sýna tímann við lestur</h4><p class="pmuted">Sjálfgefið sést ekki hve mikill tími er eftir á meðan barnið les, svo það geti einbeitt sér að sögunni. Klukkan telur samt niður eins og áður.</p><div class="chips small" id="timeChips" role="radiogroup" aria-label="Sýna tímann við lestur"></div>
           <h4>Upptökuhnappur á lestrarsíðunni</h4><div class="chips small" id="recChips" role="radiogroup" aria-label="Upptökuhnappur"></div>
           <div id="sylSet"><h4>Atkvæðaskipting á löngum orðum</h4><p class="pmuted">Löng orð fá græna línu undir sig. Þegar barnið ýtir á orðið skiptist það í atkvæði.</p><div class="chips small" id="sylChips" role="radiogroup" aria-label="Atkvæðaskipting"></div></div>
           <h4>Hvað gerist næst?</h4><p class="pmuted">Einu sinni í hverri sögu giskar barnið á framhaldið áður en það les áfram.</p><div class="chips small" id="predChips" role="radiogroup" aria-label="Giska á framhaldið"></div>
@@ -7026,7 +7152,7 @@ function statQuit(r){if(!r||r.ended||r.quitSent||!r.path||!r.path.length)return;
    Ef villa kemur upp í appinu er send stutt tilkynning í errors/: villuboðin, skrá og lína, útgáfa appsins,
    tegund vafra (t.d. Safari), gerð tækis (sími/spjald/tölva), dagsetning og skjámynd. Ekkert um notandann.
    Mest 5 tilkynningar í hverri heimsókn og hver villa aðeins einu sinni. */
-const APPV='55';
+const APPV='56';
 const ERRSEEN=new Set();
 function errBrowser(){const u=navigator.userAgent||'';return /Edg\//.test(u)?'Edge':/SamsungBrowser/.test(u)?'Samsung':/Firefox\//.test(u)?'Firefox':/CriOS|Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'Annað'}
 function errSend(msg,src){try{if(!FB_CONFIG||window.__LS_NOSTAT||navigator.onLine===false)return;msg=String(msg||'').slice(0,300);src=String(src||'').replace(/^https?:\/\/[^/]+\//,'').slice(0,160);
@@ -7182,7 +7308,23 @@ function toast(title,sub,{kind='calm',persist=false,ms=7000}={}){
 
 /* ================= Heim ================= */
 const SECTIONS=['welcome','onb','tour','ready','guide','mapall','legal','start','home','read','quiz','reward','lock','parent','done','words','advent','trip','world','wcountry','wpass','wopen','buddy','maker','avatars','homeread','stats','wgame','pgame'];
-function show(id){document.body.classList.toggle('onstart',id==='start');if(id!=='read'&&typeof REC!=='undefined'&&REC.mr)recStop();for(const s of SECTIONS)$(s).hidden=s!==id;window.scrollTo(0,0)}
+/* Útlit lesskjásins: foreldri velur fyrir hvert barn, sjálfgefið A */
+const RLOOKS=[['A','Opin bók','Sagan lítur út eins og myndabók: myndin á annarri síðunni og textinn á hinni, með stórum skrautstaf.'],['B','Myndin í aðalhlutverki','Myndin fyllir hálfan skjáinn og textinn er á hvítu spjaldi við hliðina. Strik efst sýna hvaða síðu barnið er á.'],['C','Ævintýrastígur','Stígur efst með einum steini fyrir hverja síðu og mynd af barninu þar sem það er statt. Textinn er á stílabókarblaði.'],['D','Rólegt og einbeitt','Mjúkir litir úr myndinni, línan sem barnið les er lýst upp og öll lestrartólin eru undir Aa. Hringur sýnir hve langt barnið er komið.'],['O','Upprunalegt','Upprunalega útlitið á lesskjánum.']];
+const rlook=p=>{const v=p&&p.settings&&p.settings.rlook;return RLOOKS.some(x=>x[0]===v)?v:'A'};
+const rulerOn=()=>!!(PR&&(PR.settings.ruler??(rlook(PR)==='D')));
+function rlApply(){const b=document.body.classList;['A','B','C','D','O'].forEach(k=>b.remove('rl-'+k));b.add('rl-'+rlook(PR))}
+function rlProgHTML(k,n,tot){
+  if(k==='B')return Array.from({length:Math.min(tot,24)},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('');
+  if(k==='C'){const flag='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 21V4M6 4h11l-2.5 4L17 12H6" fill="#34C759" stroke="#1E8E3E" stroke-width="2" stroke-linejoin="round"/></svg>';
+    return `<span class="rpath">${Array.from({length:tot},(_,i)=>{const j=i+1;return j===n?`<span class="rst now">${avatarSVG(avId(PR))}</span>`:j<n?`<span class="rst done">★</span>`:j===tot?`<span class="rst end">${flag}</span>`:`<span class="rst">${j}</span>`}).join('')}</span>`}
+  if(k==='D'){const r=19,c=2*Math.PI*r,f=tot?n/tot:0;return `<svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="${r}" fill="none" stroke="var(--rlring,#CFE8D8)" stroke-width="6"/><circle cx="24" cy="24" r="${r}" fill="none" stroke="#34A867" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(c*f).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 24 24)"/></svg><span>Síða ${n} af ${tot}</span>`}
+  return ''}
+function sceneTint(fig){const el=fig.querySelector('svg rect[fill],svg path[fill]');let f=el?el.getAttribute('fill'):'';const m=f&&f.match(/url\(#([^)]+)\)/);
+  if(m){const g=document.getElementById(m[1]),s=g&&g.querySelector('stop');f=s?s.getAttribute('stop-color'):''}return /^#[0-9a-f]{6}$/i.test(f||'')?f:'#CFEBD9'}
+function rlTime(){const el=$('rTime');if(!el)return;const on=!!(PR&&PR.settings.showTime)&&!$('read').hidden&&T.active;el.hidden=!on;if(!on)return;
+  const left=Math.max(0,T.total-Math.min(T.elapsed,T.total));el.textContent=T.done||left<=0?'Tíminn er búinn':`${Math.max(1,Math.ceil(left/60000))} mín eftir`}
+setInterval(()=>{try{rlTime()}catch(e){}},1000);
+function show(id){document.body.classList.toggle('onstart',id==='start');document.body.classList.toggle('inread',id==='read');if(id!=='read'&&typeof REC!=='undefined'&&REC.mr)recStop();for(const s of SECTIONS)$(s).hidden=s!==id;window.scrollTo(0,0)}
 let selMin=15;
 function weekCount(p){const now=new Date(),mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()+6)%7));let n=0;for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);if(p.days.includes(dkey(d)))n++}return n}
 function streak(p){const d=new Date();if(!p.days.includes(dkey(d)))d.setDate(d.getDate()-1);let n=0;while(p.days.includes(dkey(d))){n++;d.setDate(d.getDate()-1)}return n}
@@ -7355,11 +7497,16 @@ function renderPage(){
   $('rStory').textContent=st.title;$('rPage').textContent=st.book?`Kafli ${p.ch} af ${st.len}`:`Síða ${run.path.length} af ${st.len}`;
   if(REC.mr)recRoll();else $('recFeed').textContent='';
   fig.innerHTML=svgWrap(drawScene(p.scene,run.story),p.task?'':'Mynd úr sögunni');
+  {rlApply();const k=rlook(PR),tot=st.len,n=p.end?tot:Math.max(1,Math.min(tot,st.book?p.ch:run.path.length));$('rProg').innerHTML=rlProgHTML(k,n,tot);
+    // Í B fyllir myndin borðann; á síðum með myndaverkefni er hún sýnd heil svo ekkert sem á að finna skerist af
+    if(k==='B'){const s=fig.querySelector('svg');if(s)s.setAttribute('preserveAspectRatio',p.task?'xMidYMid meet':'xMidYMid slice')}
+    if(k==='B'||k==='D')document.body.style.setProperty('--rlt',sceneTint(fig));
+    $('rlAa').setAttribute('aria-expanded','false');$('page').classList.remove('aaopen');
+    const bd=$('rBuddy');bd.hidden=!(k==='C'&&!p.end&&p.choices&&p.choices.length);if(!bd.hidden)bd.innerHTML=`<span class="avc">${avatarSVG(avId(PR))}</span><span class="bub">Hvað á að gera næst?</span>`;
+    rlTime()}
   {const sylOn=(PR.age===7||PR.age===5)&&PR.settings.syl!==false&&!run.buddy,ht=richText(pers(p.text));$('storyText').innerHTML=sylOn?sylWrap(ht):ht}recUI();setupWrite(p);rulerLine=0;applyTextPrefs();setupListen(st,id);
   $('buddyNote').hidden=!run.buddy;if(run.buddy)$('buddyNote').textContent='Þú ert að lesa upphátt fyrir litla bróður þinn. Lestu skýrt og rólega og taktu upp lesturinn.';
   {const pn=$('predNote');if(run.pred&&run.pred.page===id){pn.hidden=false;pn.textContent=run.pred.ok?'Þú giskaðir rétt! Vel hugsað.':`Þú giskaðir: „${run.pred.guess}“. Það sem gerðist: „${run.pred.actual}“.`;run.pred=null}else pn.hidden=true}$('wordTip').hidden=true;
-  const rt=$('readTimes');
-  if(cur&&cur.reads===2&&!st.book){rt.hidden=false;rt.innerHTML=`<span>Lestu tvisvar</span><button type="button" class="rdot" aria-pressed="false" aria-label="Fyrsti lestur">${CHK}</button><button type="button" class="rdot" aria-pressed="false" aria-label="Annar lestur">${CHK}</button>`}else rt.hidden=true;
   const hasTask=setupTask(p);
   pg={s:run.story,p:id,w:st.book?0:wc(pers(p.text)),start:R.ms,end:null};$('again').hidden=!!(st.book||st.advent||run.buddy);
   if(p.end){
@@ -7376,7 +7523,6 @@ function renderPage(){
   const pgEl=$('page');pgEl.classList.remove('turn');void pgEl.offsetWidth;pgEl.classList.add('turn');
   window.scrollTo(0,0);$('storyText').focus({preventScroll:true});
 }
-$('readTimes').addEventListener('click',e=>{const b=e.target.closest('.rdot');if(b)b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true')});
 $('choices').addEventListener('click',e=>{
   const pb=e.target.closest('[data-pred]');if(pb){const o=run.predOpts[+pb.dataset.pred],right=run.predOpts.find(x=>x.ok);run.pred={page:run.predNext,ok:o.ok,guess:o.t,actual:right.t};run.path.push(run.predNext);renderPage();return}
   const b=e.target.closest('.choice');if(!b)return;commitPage();
@@ -7636,7 +7782,9 @@ function renderParent(){
     $('jumpChips').innerHTML=[['auto','Sjálfvirkt'],['on','Opið'],['off','Lokað']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${m===k}" data-jump="${k}">${l}</button>`).join('');
     $('jumpInfo').textContent=`Sjálfvirkt: þrjár auðveldustu sögurnar fyrir 9–10 ára opnast þegar leshraðinn er 70 orð á mínútu eða meira og 80% svara eru rétt. Núna: ${rs.wpm!=null?rs.wpm+' orð/mín':'of lítil gögn'}${rs.acc!=null?', '+Math.round(rs.acc*100)+'% rétt':''}. Staða: ${jumpOpen(PP)?'opið':'lokað'}.`}
   const rc=PP.settings.rec!==false;$('recChips').innerHTML=[['1','Sýna'],['0','Fela']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${rc===(k==='1')}" data-rec="${k}">${l}</button>`).join('');
-  {const wo=PP.settings.world||'auto',wm=PP.settings.wmode||'free';$('worldChips').innerHTML=[['auto','Eftir Íslandshringinn'],['on','Opna núna']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${wo===k}" data-world="${k}">${l}</button>`).join('');$('wmodeChips').innerHTML=[['free','Nei'],['back1','Já, annars einn reit til baka'],['home','Já, annars aftur heim']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${wm===k}" data-wmode="${k}">${l}</button>`).join('');$('worldInfo').textContent=worldInfo(PP);const lb=PP.settings.lib||'B';$('libChips').innerHTML=LIBSTYLES.map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${lb===k}" data-lib="${k}">${l}</button>`).join('')}
+  {const wo=PP.settings.world||'auto',wm=PP.settings.wmode||'free';$('worldChips').innerHTML=[['auto','Eftir Íslandshringinn'],['on','Opna núna']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${wo===k}" data-world="${k}">${l}</button>`).join('');$('wmodeChips').innerHTML=[['free','Nei'],['back1','Já, annars einn reit til baka'],['home','Já, annars aftur heim']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${wm===k}" data-wmode="${k}">${l}</button>`).join('');$('worldInfo').textContent=worldInfo(PP);const lb=PP.settings.lib||'B';$('libChips').innerHTML=LIBSTYLES.map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${lb===k}" data-lib="${k}">${l}</button>`).join('');
+    const rl=rlook(PP);$('rlChips').innerHTML=RLOOKS.map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${rl===k}" data-rl="${k}">${l}</button>`).join('');$('rlInfo').textContent=(RLOOKS.find(x=>x[0]===rl)||[])[2]||'';
+    const tm=!!PP.settings.showTime;$('timeChips').innerHTML=[['0','Nei'],['1','Já']].map(([k,l])=>`<button type="button" class="chip" role="radio" aria-checked="${tm===(k==='1')}" data-tm="${k}">${l}</button>`).join('')}
   renderBackupInfo();renderRecs();renderParent2();
   $('sessList').innerHTML=stats.length?stats.slice().reverse().slice(0,30).map(sessHTML).join(''):'<p class="pmuted">Engin lestrarskipti enn. Þau birtast hér þegar barnið hefur lesið.</p>';
 }
@@ -8151,6 +8299,8 @@ $('jarNo').addEventListener('click',()=>{$('jarConfirm').hidden=true;$('jarEmpty
 $('jarYes').addEventListener('click',()=>{const J=jarCur();(J.hist=J.hist||[]).push({t:Date.now(),goal:J.goal,reward:J.reward,n:J.n});J.n=Math.max(0,J.n-J.goal);save();renderParent();$('jarFeed').textContent='Ný krukka er hafin. Til hamingju með umbunina!'});
 function worldInfo(p){const nm=p.name||'Barnið';if(worldOpen(p)){const nV=WORLD.filter((w,i)=>w.k!=='aq'&&wvis(p,i)).length,nS=WORLD.filter(w=>w.k!=='aq'&&wst(p)[w.k]).length;return `${nm} er ${wloc(p)}. ${nV} af ${WTOT} löndum heimsótt og ${nS} ${nS===1?'stimpill':'stimplar'} í vegabréfinu.`}const left=Math.max(0,TRIP.length-(p.trip||0));return `Opnast sjálfkrafa þegar barnið hefur farið hringinn um Ísland. ${nm} er ${TRIP[(p.trip||0)%TRIP.length][1]} og á ${left===1?'einn lestrardag':left+' lestrardaga'} eftir af hringnum. Þið getið líka opnað ferðina strax.`}
 $('libChips').addEventListener('click',e=>{const b=e.target.closest('[data-lib]');if(!b)return;PP.settings.lib=b.dataset.lib;save();renderParent()});
+$('rlChips').addEventListener('click',e=>{const b=e.target.closest('[data-rl]');if(!b)return;PP.settings.rlook=b.dataset.rl;save();renderParent()});
+$('timeChips').addEventListener('click',e=>{const b=e.target.closest('[data-tm]');if(!b)return;PP.settings.showTime=b.dataset.tm==='1';save();renderParent()});
 $('worldChips').addEventListener('click',e=>{const b=e.target.closest('[data-world]');if(!b)return;const was=worldOpen(PP);PP.settings.world=b.dataset.world;if(!was&&worldOpen(PP)){PP.wseen=false;PP.wfrom=PP.wfrom||Date.now();PP.wlast=null;PP.wpen=null}save();renderParent()});
 $('wmodeChips').addEventListener('click',e=>{const b=e.target.closest('[data-wmode]');if(!b)return;PP.settings.wmode=b.dataset.wmode;PP.wpen=PP.wlast;save();renderParent()});
 $('jumpChips').addEventListener('click',e=>{const b=e.target.closest('[data-jump]');if(!b)return;PP.settings.jump=b.dataset.jump;save();renderParent()});
@@ -8346,17 +8496,18 @@ function renderDys(){const s=PP.settings,on=!!s.dys,t=s.tint||'cream';$('dysOn')
 $('dysOn').addEventListener('change',()=>{PP.settings.dys=$('dysOn').checked;if(!PP.settings.tint)PP.settings.tint='cream';save();renderDys()});
 $('dysTint').addEventListener('click',e=>{const b=e.target.closest('[data-tint]');if(!b)return;PP.settings.tint=b.dataset.tint;save();renderDys()});
 function applyTextPrefs(){dysApply(PR);const st=$('storyText'),fs=PR.settings.fs||0;st.classList.remove('fsm1','fs1','fs2');if(fs)st.classList.add(fs<0?'fsm1':'fs'+fs);
-  $('fsDown').disabled=fs<=-1;$('fsUp').disabled=fs>=2;const on=!!PR.settings.ruler;$('rulerBtn').setAttribute('aria-pressed',String(on));$('ruler').hidden=!on;$('rulerNav').hidden=!on;if(on)setRuler(rulerLine)}
+  $('fsDown').disabled=fs<=-1;$('fsUp').disabled=fs>=2;const on=rulerOn();$('rulerBtn').setAttribute('aria-pressed',String(on));$('ruler').hidden=!on;$('rulerNav').hidden=!on;if(on)setRuler(rulerLine)}
 let rulerLine=0;
 function setRuler(n){const st=$('storyText'),lh=parseFloat(getComputedStyle(st).lineHeight)||40,lines=Math.max(1,Math.round(st.scrollHeight/lh));rulerLine=Math.max(0,Math.min(lines-1,n));const r=$('ruler');r.style.top=(st.offsetTop+rulerLine*lh)+'px';r.style.height=lh+'px'}
 $('fsDown').addEventListener('click',()=>{PR.settings.fs=Math.max(-1,(PR.settings.fs||0)-1);save();applyTextPrefs()});
 $('fsUp').addEventListener('click',()=>{PR.settings.fs=Math.min(2,(PR.settings.fs||0)+1);save();applyTextPrefs()});
-$('rulerBtn').addEventListener('click',()=>{PR.settings.ruler=!PR.settings.ruler;save();rulerLine=0;applyTextPrefs()});
+$('rulerBtn').addEventListener('click',()=>{PR.settings.ruler=!rulerOn();save();rulerLine=0;applyTextPrefs()});
+$('rlAa').addEventListener('click',()=>{const o=$('page').classList.toggle('aaopen');$('rlAa').setAttribute('aria-expanded',String(o));if(rulerOn())setRuler(rulerLine)});
 $('rulerUp').addEventListener('click',()=>setRuler(rulerLine-1));
 $('rulerDn').addEventListener('click',()=>setRuler(rulerLine+1));
 $('textWrap').addEventListener('click',e=>{const s=e.target.closest('.syl');if(s){const on=s.classList.toggle('split');s.textContent=on?s.dataset.s:s.dataset.s.replace(/·/g,'');return}
-  if(PR.settings.ruler&&!e.target.closest('button')){const st=$('storyText'),lh=parseFloat(getComputedStyle(st).lineHeight)||40;setRuler(Math.floor((e.clientY-st.getBoundingClientRect().top)/lh))}});
-window.addEventListener('resize',()=>{if(PR&&PR.settings.ruler&&!$('read').hidden)setRuler(rulerLine)});
+  if(rulerOn()&&!e.target.closest('button')){const st=$('storyText'),lh=parseFloat(getComputedStyle(st).lineHeight)||40;setRuler(Math.floor((e.clientY-st.getBoundingClientRect().top)/lh))}});
+window.addEventListener('resize',()=>{if(PR&&rulerOn()&&!$('read').hidden)setRuler(rulerLine)});
 
 /* ---------- Hvað gerist næst? ---------- */
 function predEligible(st,p){return PR.settings.pred!==false&&!run.predDone&&!run.buddy&&!st.book&&!st.advent&&!st.made&&run.path.length===2&&p.choices&&p.choices.length>=2}
@@ -8760,6 +8911,9 @@ const HB=[
 <p>Sögurnar skiptast í flokkana Þú ert hetjan, Ævintýri, Sannar sögur um íþróttastjörnur og Saga og náttúra. Undir Ævintýri eru líka gömul og sígild ævintýri, eins og sagan um Búkollu, myndskreytt í ólíkum stíl. Á byrjendastiginu heitir síðasti flokkurinn Stafir og hljóð. Í desember bætist jóladagatalið við ef það er opið.</p>
 <h3>Útlit bókasafnsins</h3>
 <p>Sögurnar geta birst á fjóra vegu: sem kápur í flipum, sem opin bók með efnisyfirliti, sem hringekja þar sem flett er á milli bóka eða sem bókaskápur með hillu fyrir hvern flokk. Þið veljið útlitið fyrir hvert barn undir Stillingar → barnið → Stillingar → Útlit bókasafnsins. Allt annað á heimasíðunni helst eins.</p>
+<h3>Útlit lesskjásins</h3>
+<p>Lesskjárinn getur litið út á fimm vegu: <b>Opin bók</b> (sjálfgefið), <b>Myndin í aðalhlutverki</b>, <b>Ævintýrastígur</b>, <b>Rólegt og einbeitt</b> og <b>Upprunalegt</b>. Textinn, myndirnar og lestrartólin eru þau sömu í þeim öllum. Þið veljið útlitið fyrir hvert barn undir Stillingar → barnið → Stillingar → Útlit lesskjásins.</p>
+<p>Sjálfgefið sést ekki hve mikill tími er eftir á meðan barnið les, svo það geti einbeitt sér að sögunni. Ef þið viljið að tíminn sjáist veljið þið Já undir Sýna tímann við lestur á sama stað.</p>
 <h3>Merkja sögu sem lesna</h3>
 <p>Ef barnið hefur lesið sögu annars staðar má halda fingri á bókinni í tvær sekúndur og merkja hana lesna. Hún fer þá í hilluna en telst ekki með í leshraðanum. Sama aðferð tekur merkinguna af.</p>
 <h3>Lesa aftur</h3>
@@ -8830,7 +8984,7 @@ const HB=[
 <p>Leshraðinn er reiknaður í orðum á mínútu út frá tímanum sem hver síða er opin. Pásur og tími í myndaverkefnum teljast ekki með og síður sem eru opnar mjög stutt eða mjög lengi eru ekki teknar með. Sögur sem eru merktar lesnar teljast heldur ekki með.</p>
 <p>Súluritið sýnir eitt meðaltal fyrir hvern dag, jafnvel þótt barnið hafi lesið oftar en einu sinni. Þegar meira en vika er komin er hægt að skoða meðaltal hverrar viku og síðar hvers mánaðar.</p>
 <h3>Flipar hvers barns</h3>
-<ul><li><b>Yfirlit:</b> Stjörnur, leshraði, lestrardagar og hvernig gengur með spurningarnar.</li><li><b>Stillingar:</b> Nafn, mynd, þyngdarstig, stökk upp, atkvæðaskipting, lestrarútlit fyrir lesblindu, ferðalagið, útlit bókasafnsins og fleira.</li><li><b>Umbun:</b> Heimalestur, gefa stjörnur og viðurkenningarskjöl.</li><li><b>Upptökur:</b> Upplestur barnsins, ef það hefur tekið sig upp.</li><li><b>Saga:</b> Öll lestrarskipti með sögum, endum og svörum.</li></ul>
+<ul><li><b>Yfirlit:</b> Stjörnur, leshraði, lestrardagar og hvernig gengur með spurningarnar.</li><li><b>Stillingar:</b> Nafn, mynd, þyngdarstig, stökk upp, atkvæðaskipting, lestrarútlit fyrir lesblindu, ferðalagið, útlit bókasafnsins, útlit lesskjásins, hvort tíminn sést við lestur og fleira.</li><li><b>Umbun:</b> Heimalestur, gefa stjörnur og viðurkenningarskjöl.</li><li><b>Upptökur:</b> Upplestur barnsins, ef það hefur tekið sig upp.</li><li><b>Saga:</b> Öll lestrarskipti með sögum, endum og svörum.</li></ul>
 <h3>Mamma eða pabbi les fyrst</h3>
 <p>Undir Sameiginlegt getur foreldri lesið sögu upphátt og tekið lesturinn upp. Barnið getur þá hlustað á söguna áður en það les hana sjálft.</p>
 <h3>Stökk upp</h3>
@@ -8862,6 +9016,7 @@ const FAQ=[
  ['Hvað gerist ef barnið missir úr degi?','Sjálfgefið ekkert. Barnið færist áfram á kortinu fyrir hvern lestrardag. Ef þið hafið valið að barnið þurfi að lesa samfleytt fer það einn reit til baka eða aftur heim til Íslands.'],
  ['Hvernig skrái ég mig út?','Farðu í Stillingar → Aðgangur og ýttu á „Skrá út af þessu tæki“. Lesturinn er geymdur í aðganginum og kemur aftur þegar þú skráir þig inn. Upptökur eru aðeins á tækinu og eyðast, svo vistaðu afrit fyrst ef þú vilt halda þeim.'],
  ['Hvernig merki ég sögu sem lesna?','Barnið heldur fingri á bókinni í bókasafninu í tvær sekúndur og velur Merkja sem lesna. Sagan fer í hilluna en telst ekki með í leshraðanum. Sama aðferð tekur merkinguna af.'],
+  ['Hvernig breyti ég útliti lesskjásins?','Veldu barnið í stillingunum, opnaðu flipann Stillingar og veldu undir Útlit lesskjásins: Opin bók, Myndin í aðalhlutverki, Ævintýrastígur, Rólegt og einbeitt eða Upprunalegt. Opin bók er sjálfgefin og hægt er að hafa ólíkt útlit fyrir hvert barn.'],
  ['Hvernig breyti ég útliti bókasafnsins?','Veldu barnið í stillingunum, opnaðu flipann Stillingar og veldu undir Útlit bókasafnsins: Kápur og flipar, Opin bók, Hringekja eða Bókaskápurinn. Hægt er að hafa ólíkt útlit fyrir hvert barn.'],
  ['Barnið gleymdi að skrá heimalestur. Hvað geri ég?','Undir Ég las bók heima er hægt að velja í dag, í gær eða í fyrradag. Lengra aftur í tímann skráir þú lesturinn á mælaborðinu undir Skrá heimalestur.'],
  ['Virkar appið án nettengingar?','Já. Þegar appið hefur verið opnað einu sinni virkar það líka án nets og samstillist þegar tenging kemst aftur á.'],
