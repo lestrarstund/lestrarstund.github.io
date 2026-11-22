@@ -43,7 +43,7 @@ Foreldri getur valið mynd úr myndasafni tækisins sem prófílmynd fyrir barn,
 
 **Nafnlaus talning á notkun sagna**
 
-Til að sjá hvaða sögur börnum líkar best teljum við hve oft hver saga er byrjuð og kláruð, hvaða endir er valinn og á hvaða síðu lestri sögu er hætt, ásamt aldurshópi (3–6, 7–8 eða 9–11 ára). Talningin er nafnlaus. Engin nöfn, auðkenni, aðgangur eða upplýsingar um tæki eru vistuð með tölunum, aðeins samanlagðir teljarar fyrir hverja sögu. Sögur sem börnin búa sjálf til í Sögusmiðjunni eru ekki taldar.
+Til að sjá hvaða sögur börnum líkar best teljum við hve oft hver saga er byrjuð og kláruð, hvaða endir er valinn og á hvaða síðu lestri sögu er hætt, ásamt aldurshópi (3–6, 7–8 eða 9–11 ára). Talningin er nafnlaus. Engin nöfn, auðkenni, aðgangur eða upplýsingar um tæki eru vistuð með tölunum, aðeins samanlagðir teljarar fyrir hverja sögu. Sögur sem börnin búa sjálf til í Sögusmiðjunni eru ekki taldar. Við teljum líka nafnlaust hve mörg tæki opna appið á hverjum degi, hve mörg þeirra eru með aðgang og á hve mörgum var lesið. Hvert tæki telst einu sinni á dag og ekkert auðkenni fylgir. Tækið man aðeins sjálft hvort það hefur þegar verið talið þann dag.
 
 **Nafnlausar villutilkynningar**
 

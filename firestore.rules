@@ -14,6 +14,8 @@ service cloud.firestore {
     // Hver notandi á eitt skjal sem vísar á fjölskylduna hans
     match /users/{uid} {
       allow read, write: if signedIn() && request.auth.uid == uid;
+      // Umsjónarmaður má telja aðganga á tölfræðisíðunni
+      allow list: if isAdmin();
     }
 
     match /families/{fid} {
@@ -21,6 +23,8 @@ service cloud.firestore {
       allow create: if signedIn() && fid == request.auth.uid
         && request.resource.data.members == [request.auth.uid];
       allow read, delete: if signedIn() && request.auth.uid in resource.data.members;
+      // Umsjónarmaður má telja heimili og nýskráningar á tölfræðisíðunni (les ekki gögnin í parts)
+      allow list: if isAdmin();
       // Foreldri í fjölskyldunni má breyta henni (t.d. fjarlægja sig)
       allow update: if signedIn() && (
         request.auth.uid in resource.data.members
@@ -74,6 +78,17 @@ service cloud.firestore {
     // Yfirlitið les alla enda og hættusíður í einu (collection group)
     match /{path=**}/ends/{pid} { allow read: if isAdmin(); }
     match /{path=**}/quits/{pid} { allow read: if isAdmin(); }
+
+    // Nafnlaus dagleg notkun: usage/{ÁÁÁÁ-MM-DD} með teljurum sem aðeins má hækka um einn.
+    // dev = tæki opnaði appið, acc = með aðgang, read = las síðu, newdev = nýtt tæki. Aðeins umsjónarmaður les.
+    function useKeys() { return ['dev', 'acc', 'read', 'newdev']; }
+    match /usage/{day} {
+      allow read: if isAdmin();
+      allow create: if day.matches('^20[0-9]{2}-[01][0-9]-[0-3][0-9]$') && request.resource.data.keys().hasOnly(useKeys())
+        && newStep('dev') && newStep('acc') && newStep('read') && newStep('newdev');
+      allow update: if day.matches('^20[0-9]{2}-[01][0-9]-[0-3][0-9]$') && request.resource.data.keys().hasOnly(useKeys())
+        && updStep('dev') && updStep('acc') && updStep('read') && updStep('newdev');
+    }
 
     // Nafnlausar villutilkynningar: hver sem er má búa til stutta tilkynningu,
     // aðeins umsjónarmaður má lesa og eyða. Engin persónuauðkenni.
